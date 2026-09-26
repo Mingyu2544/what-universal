@@ -1115,3 +1115,95 @@ body {
 }
     padding-left: 50px !important;
 }
+
+.home-page {
+    padding: 10px 0 40px;
+}
+
+.home-label {
+    margin-bottom: 10px;
+
+    color: #9298a1;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+.home-page h2 {
+    margin: 0 0 12px;
+
+    color: #191c21;
+
+    font-size: 34px;
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+.home-page > p {
+    max-width: 600px;
+
+    margin: 0 0 34px;
+
+    color: #777d87;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+.home-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+}
+
+
+.home-card {
+    padding: 24px;
+
+    background: #ffffff;
+
+    border: 1px solid #e6e8eb;
+    border-radius: 12px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.025);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.home-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #d9dce1;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+.home-card-title {
+    margin-bottom: 10px;
+
+    color: #191c21;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.home-card-text {
+    color: #777d87;
+
+    font-size: 13px;
+    line-height: 1.7;
+}
