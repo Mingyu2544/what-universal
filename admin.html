@@ -9,107 +9,104 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
+
 .admin-page {
     max-width: 900px;
     margin: 0 auto;
 }
 
 .admin-card {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 18px;
-    padding: 28px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.05);
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
 
 .admin-card h2 {
-    margin: 0 0 8px;
+    margin-top: 0;
+    margin-bottom: 8px;
 }
 
-.admin-card > p {
-    margin: 0 0 25px;
-    color: #6b7280;
+.admin-card p {
+    color: #777;
+    margin-bottom: 25px;
 }
 
-.form-group {
-    margin-bottom: 18px;
+.admin-form {
+    display: grid;
+    gap: 18px;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 7px;
-    font-weight: 700;
+.admin-group {
+    display: grid;
+    gap: 8px;
 }
 
-.form-group input,
-.form-group textarea {
+.admin-group label {
+    font-weight: 600;
+}
+
+.admin-group input,
+.admin-group textarea {
     width: 100%;
     box-sizing: border-box;
     padding: 13px 15px;
-    border: 1px solid #d1d5db;
+    border: 1px solid #ddd;
     border-radius: 10px;
     font-size: 15px;
     font-family: inherit;
     outline: none;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: #111827;
+.admin-group input:focus,
+.admin-group textarea:focus {
+    border-color: #111;
 }
 
-.form-group textarea {
+.admin-group textarea {
     min-height: 150px;
     resize: vertical;
 }
 
-.save-button {
-    width: 100%;
-    padding: 14px;
-    border: 0;
+.admin-button {
+    border: none;
+    background: #111;
+    color: white;
+    padding: 14px 20px;
     border-radius: 10px;
-    background: #111827;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
 }
 
-.save-button:hover {
-    background: #000;
+.admin-button:hover {
+    opacity: 0.9;
 }
 
-.save-button:disabled {
-    opacity: .6;
+.admin-button:disabled {
+    opacity: 0.5;
     cursor: not-allowed;
 }
 
 .admin-message {
-    margin-top: 15px;
-    padding: 12px 15px;
+    margin-top: 18px;
+    padding: 13px 15px;
     border-radius: 10px;
     display: none;
 }
 
 .admin-message.success {
     display: block;
-    background: #ecfdf5;
-    color: #047857;
+    background: #eaf8ef;
+    color: #217a3c;
 }
 
 .admin-message.error {
     display: block;
-    background: #fef2f2;
-    color: #b91c1c;
+    background: #fff0f0;
+    color: #b42318;
 }
 
-.back-link {
-    display: inline-block;
-    margin-bottom: 20px;
-    color: #111827;
-    text-decoration: none;
-    font-weight: 700;
-}
 </style>
 
 </head>
@@ -140,43 +137,33 @@
 
 <header class="page-header">
 
-    <div class="header-label">
-        ADMIN PANEL
-    </div>
+    <div class="header-label">ADMIN PANEL</div>
 
-    <h1>
-        จัดการกฎเซิร์ฟเวอร์
-    </h1>
+    <h1>จัดการกฎเซิร์ฟเวอร์</h1>
 
     <p>
-        เพิ่มกฎใหม่เข้าสู่ระบบ WHAT UNIVERSAL
+        เพิ่มกฎใหม่เข้าสู่ระบบ
     </p>
 
 </header>
 
 
-<a href="index.html" class="back-link">
-    ← กลับหน้ากฎเซิร์ฟเวอร์
-</a>
-
-
 <div class="admin-card">
 
-<h2>
-    เพิ่มกฎใหม่
-</h2>
+<h2>เพิ่มกฎใหม่</h2>
 
 <p>
-    กรอกข้อมูลด้านล่างเพื่อเพิ่มกฎลงใน Google Sheets
+กรอกข้อมูลด้านล่างเพื่อเพิ่มกฎเข้าสู่ Google Sheets
 </p>
 
 
-<form id="adminForm">
+<form id="adminForm" class="admin-form">
 
-<div class="form-group">
+
+<div class="admin-group">
 
 <label for="category">
-    หมวดหมู่
+หมวดหมู่
 </label>
 
 <input
@@ -189,10 +176,10 @@
 </div>
 
 
-<div class="form-group">
+<div class="admin-group">
 
 <label for="title">
-    หัวข้อ
+หัวข้อ
 </label>
 
 <input
@@ -205,25 +192,25 @@
 </div>
 
 
-<div class="form-group">
+<div class="admin-group">
 
 <label for="body">
-    รายละเอียด
+รายละเอียด
 </label>
 
 <textarea
     id="body"
-    placeholder="กรอกรายละเอียดของกฎ..."
+    placeholder="รายละเอียดของกฎ..."
     required
 ></textarea>
 
 </div>
 
 
-<div class="form-group">
+<div class="admin-group">
 
 <label for="order">
-    ลำดับ
+ลำดับ
 </label>
 
 <input
@@ -238,11 +225,14 @@
 
 <button
     type="submit"
-    class="save-button"
+    class="admin-button"
     id="saveButton"
 >
     บันทึกกฎ
 </button>
+
+
+</form>
 
 
 <div
@@ -250,7 +240,6 @@
     class="admin-message"
 ></div>
 
-</form>
 
 </div>
 
@@ -260,85 +249,310 @@
 
 </div>
 
-<script>
-const API_URL =
-    "https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuWjJ6vjNmise3J_MLpT5D_U-rLF-4/exec";
 
-const form = document.getElementById("adminForm");
-const message = document.getElementById("message");
-const saveButton = document.getElementById("saveButton");
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuWjJ6vjNmise3J_MLpT5D_U-rLF-4/exec";
+
+
+const form =
+document.getElementById("adminForm");
+
+const message =
+document.getElementById("message");
+
+const saveButton =
+document.getElementById("saveButton");
+
 
 function showMessage(text, type) {
+
     message.textContent = text;
-    message.className = "admin-message " + type;
+
+    message.className =
+        "admin-message " + type;
+
 }
 
-form.addEventListener("submit", function(event) {
+
+/* =========================
+   ตรวจสอบว่าข้อมูลถูกเพิ่มจริง
+========================= */
+
+function verifyRule(category, title, body) {
+
+    return new Promise(function(resolve) {
+
+        const callbackName =
+            "verify_" + Date.now();
+
+        window[callbackName] =
+            function(data) {
+
+                try {
+
+                    const rules =
+                        Array.isArray(data)
+                            ? data
+                            : [];
+
+                    const found =
+                        rules.some(function(rule) {
+
+                            return (
+                                String(rule.category || "").trim() === category &&
+                                String(rule.title || "").trim() === title &&
+                                String(rule.body || "").trim() === body
+                            );
+
+                        });
+
+                    resolve(found);
+
+                } catch (error) {
+
+                    resolve(false);
+
+                }
+
+                delete window[callbackName];
+
+            };
+
+
+        const script =
+            document.createElement("script");
+
+        script.src =
+            API_URL +
+            "?callback=" +
+            callbackName +
+            "&t=" +
+            Date.now();
+
+
+        script.onerror =
+            function() {
+
+                resolve(false);
+
+                delete window[callbackName];
+
+            };
+
+
+        document.body.appendChild(script);
+
+
+        setTimeout(function() {
+
+            if (window[callbackName]) {
+
+                delete window[callbackName];
+
+                resolve(false);
+
+            }
+
+        }, 10000);
+
+    });
+
+}
+
+
+/* =========================
+   บันทึกข้อมูล
+========================= */
+
+form.addEventListener(
+"submit",
+async function(event) {
 
     event.preventDefault();
 
+
     const category =
-        document.getElementById("category").value.trim();
+        document
+        .getElementById("category")
+        .value
+        .trim();
+
 
     const title =
-        document.getElementById("title").value.trim();
+        document
+        .getElementById("title")
+        .value
+        .trim();
+
 
     const body =
-        document.getElementById("body").value.trim();
+        document
+        .getElementById("body")
+        .value
+        .trim();
+
 
     const order =
-        document.getElementById("order").value;
+        document
+        .getElementById("order")
+        .value;
+
 
     if (!category || !title || !body) {
-        showMessage("กรุณากรอกข้อมูลให้ครบ", "error");
+
+        showMessage(
+            "กรุณากรอกข้อมูลให้ครบ",
+            "error"
+        );
+
         return;
+
     }
 
-    saveButton.disabled = true;
-    saveButton.textContent = "กำลังบันทึก...";
 
-    const iframe = document.createElement("iframe");
+    saveButton.disabled = true;
+
+    saveButton.textContent =
+        "กำลังบันทึก...";
+
+
+    showMessage(
+        "กำลังส่งข้อมูลไปยัง Google Sheets...",
+        "success"
+    );
+
+
+    /* =========================
+       ส่งข้อมูล
+    ========================= */
+
+    const iframe =
+        document.createElement("iframe");
 
     iframe.style.display = "none";
+
 
     iframe.src =
         API_URL +
         "?action=add" +
-        "&category=" + encodeURIComponent(category) +
-        "&title=" + encodeURIComponent(title) +
-        "&body=" + encodeURIComponent(body) +
-        "&order=" + encodeURIComponent(order);
+        "&category=" +
+        encodeURIComponent(category) +
+        "&title=" +
+        encodeURIComponent(title) +
+        "&body=" +
+        encodeURIComponent(body) +
+        "&order=" +
+        encodeURIComponent(order) +
+        "&t=" +
+        Date.now();
+
 
     document.body.appendChild(iframe);
 
-    setTimeout(function() {
+
+    /*
+       รอให้ Apps Script เขียนข้อมูล
+    */
+
+    await new Promise(function(resolve) {
+
+        setTimeout(resolve, 2000);
+
+    });
+
+
+    /* =========================
+       ตรวจสอบ Google Sheets จริง
+    ========================= */
+
+    showMessage(
+        "กำลังตรวจสอบข้อมูล...",
+        "success"
+    );
+
+
+    let verified = false;
+
+
+    /*
+       ตรวจสอบสูงสุด 3 ครั้ง
+       ครั้งละ 2 วินาที
+    */
+
+    for (
+        let i = 0;
+        i < 3;
+        i++
+    ) {
+
+        verified =
+            await verifyRule(
+                category,
+                title,
+                body
+            );
+
+
+        if (verified) {
+
+            break;
+
+        }
+
+
+        await new Promise(
+            function(resolve) {
+
+                setTimeout(
+                    resolve,
+                    2000
+                );
+
+            }
+        );
+
+    }
+
+
+    iframe.remove();
+
+
+    if (verified) {
 
         showMessage(
-            "ส่งข้อมูลแล้ว กำลังตรวจสอบ...",
+            "เพิ่มกฎสำเร็จแล้ว ✓ ข้อมูลถูกบันทึกใน Google Sheets",
             "success"
         );
 
-        setTimeout(function() {
 
-            iframe.remove();
+        form.reset();
 
-            saveButton.disabled = false;
-            saveButton.textContent = "บันทึกกฎ";
 
-            form.reset();
-            document.getElementById("order").value = "1";
+        document
+        .getElementById("order")
+        .value = "1";
 
-            showMessage(
-                "เพิ่มกฎสำเร็จแล้ว",
-                "success"
-            );
 
-        }, 1500);
+    } else {
 
-    }, 1500);
+        showMessage(
+            "ยังไม่พบข้อมูลใน Google Sheets กรุณารอสักครู่แล้วตรวจสอบอีกครั้ง",
+            "error"
+        );
+
+    }
+
+
+    saveButton.disabled = false;
+
+    saveButton.textContent =
+        "บันทึกกฎ";
 
 });
+
 </script>
-    
+
 </body>
 </html>
