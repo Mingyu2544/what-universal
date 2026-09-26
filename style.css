@@ -36,20 +36,24 @@ input {
    SIDEBAR
    ===================================================== */
 
+/* =====================================================
+   SIDEBAR — NO BACKGROUND
+   ===================================================== */
+
 .sidebar {
     position: fixed;
 
     top: 0;
     left: 0;
 
-    width: 270px;
+    width: 190px;
     height: 100vh;
 
-    padding: 28px 14px;
+    padding: 28px 8px;
 
-    background: #111318;
+    background: transparent;
 
-    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    border: none;
 
     overflow-y: auto;
     overflow-x: hidden;
@@ -243,13 +247,12 @@ input {
    ===================================================== */
 
 .main {
-    width: calc(100% - 270px);
-
-    margin-left: 270px;
+    width: calc(100% - 190px);
+    margin-left: 190px;
 
     min-height: 100vh;
 
-    padding: 50px 45px;
+    padding: 50px 35px;
 }
 
 .container {
@@ -563,13 +566,12 @@ input {
 @media (max-width: 900px) {
 
     .sidebar {
-        width: 220px;
+        width: 170px;
     }
 
     .main {
-        width: calc(100% - 220px);
-
-        margin-left: 220px;
+        width: calc(100% - 170px);
+        margin-left: 170px;
 
         padding: 40px 25px;
     }
