@@ -46,10 +46,10 @@ input {
     top: 0;
     left: 0;
 
-    width: 250px;
+    width: 300px;
     height: 100vh;
 
-    padding: 28px 20px 28px 35px;
+    padding: 28px 20px 28px 100px;
 
     background: transparent;
     border: none;
@@ -246,8 +246,8 @@ input {
    ===================================================== */
 
 .main {
-    width: calc(100% - 250px);
-    margin-left: 250px;
+    width: calc(100% - 300px);
+    margin-left: 300px;
 
     min-height: 100vh;
 
