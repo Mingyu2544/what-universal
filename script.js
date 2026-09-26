@@ -1,317 +1,352 @@
 const API_URL =
-  'https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuJw6JvjNmise3J_MLpT5D_U-rLF-4/exec';
+  "https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuJw6JvjNmise3J_MLpT5D_U-rLF-4/exec";
 
 let allRules = [];
-let selectedCategory = 'all';
+let currentCategory = "ทั้งหมด";
 
-document.addEventListener('DOMContentLoaded', function () {
 
-    loadRules();
-
-});
-
+// ==============================
+// โหลดข้อมูลจาก Google Sheets
+// ==============================
 
 function loadRules() {
 
-    const callbackName =
-        'loadRules_' + Date.now();
+  const callbackName =
+    "rulesCallback_" + Date.now();
 
-    window[callbackName] = function (data) {
+  window[callbackName] = function (data) {
 
-        console.log('API DATA:', data);
+    allRules = Array.isArray(data) ? data : [];
 
-        allRules = data;
+    buildCategoryMenu();
+    render();
 
-        buildCategoryMenu();
+    delete window[callbackName];
+  };
 
-        render();
+  const script =
+    document.createElement("script");
 
-        delete window[callbackName];
+  script.src =
+    API_URL +
+    "?callback=" +
+    callbackName;
 
-        const script =
-            document.getElementById('api-script');
+  script.onerror = function () {
 
-        if (script) {
-            script.remove();
-        }
+    document.getElementById("status").textContent =
+      "ไม่สามารถโหลดข้อมูลได้";
 
-    };
+  };
 
-
-    const script =
-        document.createElement('script');
-
-    script.id = 'api-script';
-
-    script.src =
-        API_URL +
-        '?callback=' +
-        callbackName;
-
-    script.onerror = function () {
-
-        document.getElementById('ruleCount').textContent =
-            'เชื่อมต่อ API ไม่สำเร็จ';
-
-        document.getElementById('rulesContainer').innerHTML =
-            `
-            <div class="empty">
-                ไม่สามารถโหลดข้อมูลจาก Google Sheets ได้
-            </div>
-            `;
-
-        delete window[callbackName];
-
-        script.remove();
-
-    };
-
-
-    document.body.appendChild(script);
-
+  document.body.appendChild(script);
 }
+
+
+// ==============================
+// สร้างเมนูหมวดหมู่
+// ==============================
 
 function buildCategoryMenu() {
 
-    const menu =
-        document.getElementById('categoryMenu');
+  const menu =
+    document.getElementById("categoryMenu");
 
-    const categories =
-        [...new Set(
-            allRules
-                .map(function (rule) {
-                    return rule.category;
-                })
-                .filter(Boolean)
-        )];
+  if (!menu) return;
 
+  const categories =
+    [...new Set(
+      allRules
+        .map(rule => rule.category)
+        .filter(Boolean)
+    )];
 
-    menu.innerHTML = `
-        <button
-            class="menu-item active"
-            data-category="all"
-        >
-            <span class="menu-icon">▦</span>
-            <span>กฎทั้งหมด</span>
-        </button>
-    `;
+  menu.innerHTML = "";
 
+  // ปุ่มทั้งหมด
+  const allButton =
+    document.createElement("button");
 
-    categories.forEach(function (category) {
+  allButton.className =
+    "category-btn active";
 
-        const button =
-            document.createElement('button');
+  allButton.innerHTML =
+    `<span>▦</span> กฎทั้งหมด`;
 
-        button.className = 'menu-item';
+  allButton.onclick = function () {
 
-        button.dataset.category = category;
+    currentCategory = "ทั้งหมด";
 
+    setActiveCategory(this);
 
-        const icon =
-            getCategoryIcon(category);
+    render();
+  };
+
+  menu.appendChild(allButton);
 
 
-        button.innerHTML = `
-            <span class="menu-icon">
-                ${icon}
-            </span>
+  // ปุ่มแต่ละหมวด
+  categories.forEach(category => {
 
-            <span>
-                ${escapeHTML(category)}
-            </span>
-        `;
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "category-btn";
+
+    button.innerHTML =
+      `<span>${getCategoryIcon(category)}</span> ${category}`;
+
+    button.onclick = function () {
+
+      currentCategory = category;
+
+      setActiveCategory(this);
+
+      render();
+    };
+
+    menu.appendChild(button);
+
+  });
+}
 
 
-        button.addEventListener(
-            'click',
-            function () {
+// ==============================
+// ไอคอนหมวดหมู่
+// ==============================
 
-                selectedCategory = category;
+function getCategoryIcon(category) {
 
-                setActive(button);
+  const text =
+    category.toLowerCase();
 
-                render();
+  if (
+    text.includes("โรลเพลย์") ||
+    text.includes("roleplay")
+  ) {
+    return "♟";
+  }
 
-            }
-        );
+  if (
+    text.includes("อาชีพ") ||
+    text.includes("job")
+  ) {
+    return "▣";
+  }
+
+  if (
+    text.includes("รถ") ||
+    text.includes("ยานพาหนะ") ||
+    text.includes("vehicle")
+  ) {
+    return "▰";
+  }
+
+  if (
+    text.includes("เซิร์ฟเวอร์") ||
+    text.includes("server")
+  ) {
+    return "◈";
+  }
+
+  return "◆";
+}
 
 
-        menu.appendChild(button);
+// ==============================
+// เปลี่ยนปุ่มที่กำลังเลือก
+// ==============================
+
+function setActiveCategory(activeButton) {
+
+  document
+    .querySelectorAll(".category-btn")
+    .forEach(button => {
+
+      button.classList.remove("active");
+
+    });
+
+  activeButton.classList.add("active");
+}
+
+
+// ==============================
+// แสดงกฎ
+// ==============================
+
+function render() {
+
+  const container =
+    document.getElementById("rulesContainer");
+
+  const status =
+    document.getElementById("status");
+
+  const count =
+    document.getElementById("ruleCount");
+
+  if (!container) return;
+
+
+  let rules =
+    allRules.filter(rule => {
+
+      if (currentCategory === "ทั้งหมด") {
+        return true;
+      }
+
+      return rule.category === currentCategory;
 
     });
 
 
-    const allButton =
-        menu.querySelector(
-            '[data-category="all"]'
-        );
+  // ค้นหา
+  const searchInput =
+    document.getElementById("searchInput");
+
+  const search =
+    searchInput
+      ? searchInput.value
+          .trim()
+          .toLowerCase()
+      : "";
 
 
-    allButton.addEventListener(
-        'click',
-        function () {
+  if (search) {
 
-            selectedCategory = 'all';
+    rules = rules.filter(rule => {
 
-            setActive(allButton);
+      return (
+        String(rule.title || "")
+          .toLowerCase()
+          .includes(search) ||
 
-            render();
+        String(rule.body || "")
+          .toLowerCase()
+          .includes(search) ||
 
-        }
-    );
+        String(rule.category || "")
+          .toLowerCase()
+          .includes(search)
+      );
 
+    });
+
+  }
+
+
+  // จำนวนกฎ
+  if (count) {
+
+    count.textContent =
+      `ทั้งหมด ${rules.length} กฎ`;
+
+  }
+
+
+  // ไม่มีข้อมูล
+  if (rules.length === 0) {
+
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">⌕</div>
+        <h3>ไม่พบกฎที่ค้นหา</h3>
+        <p>ลองเปลี่ยนหมวดหมู่หรือคำค้นหา</p>
+      </div>
+    `;
+
+    if (status) {
+      status.textContent = "";
+    }
+
+    return;
+  }
+
+
+  // แสดงข้อมูล
+  container.innerHTML =
+    rules.map((rule, index) => {
+
+      return `
+        <article class="rule-card">
+
+          <div class="rule-number">
+            ${index + 1}
+          </div>
+
+          <div class="rule-content">
+
+            <div class="rule-category">
+              ${escapeHTML(rule.category)}
+            </div>
+
+            <h3>
+              ${escapeHTML(rule.title)}
+            </h3>
+
+            <p>
+              ${escapeHTML(rule.body)}
+            </p>
+
+          </div>
+
+        </article>
+      `;
+
+    }).join("");
+
+
+  if (status) {
+
+    status.textContent =
+      `แสดง ${rules.length} กฎ`;
+
+  }
 }
 
 
-function getCategoryIcon(category) {
-
-    const name =
-        String(category)
-            .toLowerCase();
-
-
-    if (
-        name.includes('roleplay') ||
-        name.includes('โรลเพลย์')
-    ) {
-        return '◈';
-    }
-
-
-    if (
-        name.includes('อาชีพ')
-    ) {
-        return '⚒';
-    }
-
-
-    if (
-        name.includes('ยานพาหนะ') ||
-        name.includes('รถ')
-    ) {
-        return '◉';
-    }
-
-
-    if (
-        name.includes('เซิร์ฟเวอร์') ||
-        name.includes('server')
-    ) {
-        return '◆';
-    }
-
-
-    return '◇';
-
-}
-
-function setActive(button) {
-
-    document
-        .querySelectorAll('.menu-item')
-        .forEach(function (item) {
-
-            item.classList.remove('active');
-
-        });
-
-    button.classList.add('active');
-
-}
-
-
-function render() {
-
-    const searchInput =
-        document.getElementById('searchInput');
-
-    const query =
-        searchInput
-            ? searchInput.value
-                .trim()
-                .toLowerCase()
-            : '';
-
-
-    const filtered =
-        allRules.filter(function (rule) {
-
-            const categoryMatch =
-                selectedCategory === 'all' ||
-                rule.category === selectedCategory;
-
-
-            const searchMatch =
-                !query ||
-                (
-                    rule.category +
-                    ' ' +
-                    rule.title +
-                    ' ' +
-                    rule.body
-                )
-                .toLowerCase()
-                .includes(query);
-
-
-            return categoryMatch && searchMatch;
-
-        });
-
-
-    document.getElementById('ruleCount').textContent =
-        filtered.length + ' ข้อ';
-
-
-    document.getElementById('rulesContainer').innerHTML =
-        filtered.length
-
-            ? filtered.map(function (rule) {
-
-                return `
-                    <article class="rule-card">
-
-                        <div class="rule-meta">
-
-                            <span class="number">
-                                #${escapeHTML(rule.id)}
-                            </span>
-
-                            <span class="badge">
-                                ${escapeHTML(rule.category)}
-                            </span>
-
-                        </div>
-
-                        <div class="rule-title">
-                            ${escapeHTML(rule.title)}
-                        </div>
-
-                        <div class="rule-body">
-                            ${escapeHTML(rule.body)}
-                        </div>
-
-                    </article>
-                `;
-
-            }).join('')
-
-            : `
-                <div class="empty">
-                    ไม่พบกฎที่ค้นหา
-                </div>
-            `;
-
-}
-
+// ==============================
+// ป้องกัน HTML แปลกปลอม
+// ==============================
 
 function escapeHTML(value) {
 
-    return String(value ?? '')
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
-
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
+
+
+// ==============================
+// ระบบค้นหา
+// ==============================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
+
+    const searchInput =
+      document.getElementById("searchInput");
+
+    if (searchInput) {
+
+      searchInput.addEventListener(
+        "input",
+        function () {
+
+          render();
+
+        }
+      );
+
+    }
+
+    loadRules();
+
+  }
+);
