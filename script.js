@@ -23,14 +23,11 @@ async function loadRules() {
         "กำลังโหลดข้อมูล...";
     }
 
-
     const url =
       `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
 
-
     const response =
       await fetch(url);
-
 
     if (!response.ok) {
       throw new Error(
@@ -38,29 +35,22 @@ async function loadRules() {
       );
     }
 
-
     const csv =
       await response.text();
-
 
     allRules =
       parseCSV(csv);
 
-
     buildCategoryMenu();
     render();
-
 
   } catch (error) {
 
     console.error(error);
 
-
     if (status) {
-
       status.textContent =
         "ไม่สามารถโหลดข้อมูลได้";
-
     }
 
   }
@@ -80,14 +70,16 @@ function parseCSV(text) {
   let cell = "";
   let insideQuotes = false;
 
-
   for (let i = 0; i < text.length; i++) {
 
     const char = text[i];
     const next = text[i + 1];
 
-
-    if (char === '"' && insideQuotes && next === '"') {
+    if (
+      char === '"' &&
+      insideQuotes &&
+      next === '"'
+    ) {
 
       cell += '"';
 
@@ -95,7 +87,6 @@ function parseCSV(text) {
 
       continue;
     }
-
 
     if (char === '"') {
 
@@ -105,8 +96,10 @@ function parseCSV(text) {
       continue;
     }
 
-
-    if (char === "," && !insideQuotes) {
+    if (
+      char === "," &&
+      !insideQuotes
+    ) {
 
       row.push(cell);
 
@@ -114,7 +107,6 @@ function parseCSV(text) {
 
       continue;
     }
-
 
     if (
       (char === "\n" || char === "\r") &&
@@ -128,25 +120,24 @@ function parseCSV(text) {
         i++;
       }
 
-
       row.push(cell);
 
       rows.push(row);
 
       row = [];
-
       cell = "";
 
       continue;
     }
 
-
     cell += char;
 
   }
 
-
-  if (cell !== "" || row.length > 0) {
+  if (
+    cell !== "" ||
+    row.length > 0
+  ) {
 
     row.push(cell);
 
@@ -154,15 +145,12 @@ function parseCSV(text) {
 
   }
 
-
   if (rows.length <= 1) {
     return [];
   }
 
-
   // ลบ Header
   rows.shift();
-
 
   return rows
 
@@ -215,7 +203,9 @@ function parseCSV(text) {
 function buildCategoryMenu() {
 
   const menu =
-    document.getElementById("categoryMenu");
+    document.getElementById(
+      "categoryMenu"
+    );
 
   if (!menu) return;
 
@@ -231,6 +221,7 @@ function buildCategoryMenu() {
 
   menu.innerHTML = "";
 
+
   // =========================
   // HOME PAGE
   // =========================
@@ -241,13 +232,14 @@ function buildCategoryMenu() {
   homeButton.className =
     "category-btn active";
 
-  homeButton.innerHTML =
-    `<span>●</span> Home page`;
+  homeButton.textContent =
+    "Home page";
 
   homeButton.onclick =
     function() {
 
-      currentCategory = "HOME";
+      currentCategory =
+        "HOME";
 
       setActiveCategory(this);
 
@@ -257,15 +249,21 @@ function buildCategoryMenu() {
 
   menu.appendChild(homeButton);
 
+
+  // =========================
+  // CATEGORY TITLE
+  // =========================
+
   const title =
-  document.createElement("div");
+    document.createElement("div");
 
-title.className = "menu-title";
+  title.className =
+    "menu-title";
 
-title.textContent =
-  "หมวดหมู่";
+  title.textContent =
+    "หมวดหมู่";
 
-menu.appendChild(title);
+  menu.appendChild(title);
 
 
   // =========================
@@ -281,8 +279,8 @@ menu.appendChild(title);
       button.className =
         "category-btn";
 
-      button.innerHTML =
-        `<span>●</span> ${escapeHTML(category)}`;
+      button.textContent =
+        category;
 
       button.onclick =
         function() {
@@ -300,14 +298,7 @@ menu.appendChild(title);
 
     }
   );
-}
 
-// ========================================
-// Icon หมวดหมู่
-// ========================================
-
-function getCategoryIcon() {
-  return "●";
 }
 
 
@@ -327,10 +318,65 @@ function setActiveCategory(activeButton) {
 
     });
 
-
   activeButton.classList.add(
     "active"
   );
+
+}
+
+
+// ========================================
+// เปลี่ยนหัวข้อหน้าตามหมวดหมู่
+// ========================================
+
+function updatePageTitle() {
+
+  const title =
+    document.querySelector(
+      ".page-header h1"
+    );
+
+  const description =
+    document.querySelector(
+      ".page-header p"
+    );
+
+  if (!title) return;
+
+
+  // =========================
+  // HOME
+  // =========================
+
+  if (currentCategory === "HOME") {
+
+    title.textContent =
+      "Welcome to WHAT UNIVERSAL";
+
+    if (description) {
+
+      description.textContent =
+        "ยินดีต้อนรับเข้าสู่เว็บไซต์ข้อมูลของเซิร์ฟเวอร์";
+
+    }
+
+    return;
+  }
+
+
+  // =========================
+  // CATEGORY
+  // =========================
+
+  title.textContent =
+    currentCategory;
+
+  if (description) {
+
+    description.textContent =
+      "รายละเอียดและกฎของหมวดหมู่นี้";
+
+  }
 
 }
 
@@ -359,6 +405,10 @@ function render() {
   if (!container) return;
 
 
+  // เปลี่ยนหัวข้อตามหมวดหมู่
+  updatePageTitle();
+
+
   // =========================
   // HOME PAGE
   // =========================
@@ -383,30 +433,41 @@ function render() {
         <div class="home-grid">
 
           <div class="home-card">
+
             <div class="home-card-title">
               Server Rules
             </div>
+
             <div class="home-card-text">
               ศึกษากฎของเซิร์ฟเวอร์ก่อนเริ่มเล่น
             </div>
+
           </div>
 
+
           <div class="home-card">
+
             <div class="home-card-title">
               Community
             </div>
+
             <div class="home-card-text">
               พบปะและพูดคุยกับผู้เล่นภายในเซิร์ฟเวอร์
             </div>
+
           </div>
 
+
           <div class="home-card">
+
             <div class="home-card-title">
               Information
             </div>
+
             <div class="home-card-text">
               ข้อมูลและรายละเอียดต่าง ๆ ของเซิร์ฟเวอร์
             </div>
+
           </div>
 
         </div>
@@ -443,6 +504,10 @@ function render() {
     );
 
 
+  // =========================
+  // SEARCH
+  // =========================
+
   const searchInput =
     document.getElementById(
       "searchInput"
@@ -463,6 +528,7 @@ function render() {
         function(rule) {
 
           return (
+
             String(
               rule.title || ""
             )
@@ -484,6 +550,7 @@ function render() {
             )
               .toLowerCase()
               .includes(search)
+
           );
 
         }
@@ -491,6 +558,10 @@ function render() {
 
   }
 
+
+  // =========================
+  // จำนวนกฎ
+  // =========================
 
   if (count) {
 
@@ -500,10 +571,15 @@ function render() {
   }
 
 
+  // =========================
+  // ไม่พบข้อมูล
+  // =========================
+
   if (rules.length === 0) {
 
     container.innerHTML = `
       <div class="empty-state">
+
         <div class="empty-icon">
           ⌕
         </div>
@@ -515,6 +591,7 @@ function render() {
         <p>
           ลองเปลี่ยนหมวดหมู่หรือคำค้นหา
         </p>
+
       </div>
     `;
 
@@ -525,6 +602,10 @@ function render() {
     return;
   }
 
+
+  // =========================
+  // แสดงกฎ
+  // =========================
 
   container.innerHTML =
     rules.map(
@@ -566,7 +647,9 @@ function render() {
       `แสดง ${rules.length} กฎ`;
 
   }
+
 }
+
 
 // ========================================
 // ป้องกัน HTML
