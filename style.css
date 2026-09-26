@@ -46,13 +46,12 @@ input {
     top: 0;
     left: 0;
 
-    width: 190px;
+    width: 250px;
     height: 100vh;
 
-    padding: 28px 8px;
+    padding: 28px 20px 28px 35px;
 
     background: transparent;
-
     border: none;
 
     overflow-y: auto;
@@ -247,12 +246,12 @@ input {
    ===================================================== */
 
 .main {
-    width: calc(100% - 190px);
-    margin-left: 190px;
+    width: calc(100% - 250px);
+    margin-left: 250px;
 
     min-height: 100vh;
 
-    padding: 50px 35px;
+    padding: 50px 45px;
 }
 
 .container {
