@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>WHAT UNIVERSAL</title>
+    <title>WHAT UNIVERSAL — Server Rules</title>
 
     <link
         rel="stylesheet"
@@ -25,9 +25,14 @@
 <div class="app">
 
 
-    <!-- SIDEBAR -->
+    <!-- =========================================
+         SIDEBAR
+         ========================================= -->
 
     <aside class="sidebar">
+
+
+        <!-- LOGO -->
 
         <div class="logo">
 
@@ -39,25 +44,27 @@
         </div>
 
 
+        <!-- MENU -->
+
         <div class="menu-title">
             หมวดหมู่
         </div>
 
 
-        <!-- เมนูหมวดหมู่จะถูกสร้างจาก Google Sheets -->
+        <nav id="categoryMenu">
 
-        <div id="categoryMenu">
+            <button class="category-btn active">
 
-    <button
-        class="menu-item active"
-        data-category="all"
-    >
-        <span class="menu-icon">▦</span>
-        <span>กฎทั้งหมด</span>
-    </button>
+                <span>▦</span>
 
-</div>
+                กฎทั้งหมด
 
+            </button>
+
+        </nav>
+
+
+        <!-- ADMIN -->
 
         <div class="menu-title">
             ระบบ
@@ -65,20 +72,27 @@
 
 
         <a
-    href="admin.html"
-    class="menu-item"
->
-    <span class="menu-icon">⚙</span>
-    <span>Admin</span>
-</a>
+            href="admin.html"
+            class="category-btn"
+        >
+
+            <span>⚙</span>
+
+            Admin
+
+        </a>
+
 
     </aside>
 
 
 
-    <!-- MAIN -->
+    <!-- =========================================
+         MAIN
+         ========================================= -->
 
     <main class="main">
+
 
         <div class="container">
 
@@ -87,19 +101,23 @@
 
             <header class="page-header">
 
-    <div class="header-label">
-        SERVER RULES
-    </div>
 
-    <h1>
-        กฎเซิร์ฟเวอร์
-    </h1>
+                <div class="header-label">
+                    SERVER RULES
+                </div>
 
-    <p>
-        กฎและข้อบังคับสำหรับผู้เล่น WHAT UNIVERSAL
-    </p>
 
-</header>
+                <h1>
+                    กฎเซิร์ฟเวอร์
+                </h1>
+
+
+                <p>
+                    กรุณาศึกษาและทำความเข้าใจกฎก่อนเริ่มเล่น
+                </p>
+
+
+            </header>
 
 
 
@@ -110,7 +128,8 @@
                 <input
                     type="text"
                     id="searchInput"
-                    placeholder="ค้นหากฎ เช่น มารยาท, อุปกรณ์สื่อสาร..."
+                    placeholder="ค้นหากฎ เช่น Roleplay, ยานพาหนะ, อาชีพ..."
+                    autocomplete="off"
                 >
 
             </div>
@@ -122,17 +141,16 @@
             <div
                 id="status"
                 class="status"
-            ></div>
+            >
+                กำลังโหลด...
+            </div>
 
-
-
-            <!-- RULE COUNT -->
 
             <div
                 id="ruleCount"
                 class="rule-count"
             >
-                กำลังโหลด...
+                -
             </div>
 
 
@@ -145,13 +163,14 @@
             >
 
                 <div class="loading">
-                    กำลังโหลดกฎ...
+                    กำลังโหลดกฎเซิร์ฟเวอร์...
                 </div>
 
             </section>
 
 
         </div>
+
 
     </main>
 
