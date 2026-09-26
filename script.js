@@ -4,12 +4,20 @@ const API_URL =
 let allRules = [];
 let currentCategory = "ทั้งหมด";
 
-function loadRules() {
 
-  const callbackName =
-    "rulesCallback_" + Date.now();
+async function loadRules() {
 
-  window[callbackName] = function (data) {
+  try {
+
+    const response =
+      await fetch(API_URL);
+
+    if (!response.ok) {
+      throw new Error("โหลดข้อมูลไม่สำเร็จ");
+    }
+
+    const data =
+      await response.json();
 
     allRules =
       Array.isArray(data) ? data : [];
@@ -17,25 +25,20 @@ function loadRules() {
     buildCategoryMenu();
     render();
 
-    delete window[callbackName];
-  };
+  } catch (error) {
 
-  const script =
-    document.createElement("script");
+    console.error(error);
 
-  script.src =
-    API_URL +
-    "?callback=" +
-    callbackName;
+    const status =
+      document.getElementById("status");
 
-  script.onerror = function () {
+    if (status) {
+      status.textContent =
+        "ไม่สามารถโหลดข้อมูลได้";
+    }
 
-    document.getElementById("status").textContent =
-      "ไม่สามารถโหลดข้อมูลได้";
+  }
 
-  };
-
-  document.body.appendChild(script);
 }
 
 
@@ -73,6 +76,7 @@ function buildCategoryMenu() {
     setActiveCategory(this);
 
     render();
+
   };
 
   menu.appendChild(allButton);
@@ -96,6 +100,7 @@ function buildCategoryMenu() {
       setActiveCategory(this);
 
       render();
+
     };
 
     menu.appendChild(button);
@@ -141,6 +146,7 @@ function getCategoryIcon(category) {
   }
 
   return "◆";
+
 }
 
 
@@ -155,6 +161,7 @@ function setActiveCategory(activeButton) {
     });
 
   activeButton.classList.add("active");
+
 }
 
 
@@ -250,6 +257,7 @@ function render() {
     }
 
     return;
+
   }
 
 
