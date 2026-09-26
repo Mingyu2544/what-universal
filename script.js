@@ -71,7 +71,6 @@ function loadRules() {
 
 }
 
-
 function buildCategoryMenu() {
 
     const menu =
@@ -90,8 +89,10 @@ function buildCategoryMenu() {
     menu.innerHTML = `
         <button
             class="menu-item active"
-            data-category="all">
-            กฎทั้งหมด
+            data-category="all"
+        >
+            <span class="menu-icon">▦</span>
+            <span>กฎทั้งหมด</span>
         </button>
     `;
 
@@ -103,19 +104,37 @@ function buildCategoryMenu() {
 
         button.className = 'menu-item';
 
-        button.textContent = category;
-
         button.dataset.category = category;
 
-        button.addEventListener('click', function () {
 
-            selectedCategory = category;
+        const icon =
+            getCategoryIcon(category);
 
-            setActive(button);
 
-            render();
+        button.innerHTML = `
+            <span class="menu-icon">
+                ${icon}
+            </span>
 
-        });
+            <span>
+                ${escapeHTML(category)}
+            </span>
+        `;
+
+
+        button.addEventListener(
+            'click',
+            function () {
+
+                selectedCategory = category;
+
+                setActive(button);
+
+                render();
+
+            }
+        );
+
 
         menu.appendChild(button);
 
@@ -128,18 +147,63 @@ function buildCategoryMenu() {
         );
 
 
-    allButton.addEventListener('click', function () {
+    allButton.addEventListener(
+        'click',
+        function () {
 
-        selectedCategory = 'all';
+            selectedCategory = 'all';
 
-        setActive(allButton);
+            setActive(allButton);
 
-        render();
+            render();
 
-    });
+        }
+    );
 
 }
 
+
+function getCategoryIcon(category) {
+
+    const name =
+        String(category)
+            .toLowerCase();
+
+
+    if (
+        name.includes('roleplay') ||
+        name.includes('โรลเพลย์')
+    ) {
+        return '◈';
+    }
+
+
+    if (
+        name.includes('อาชีพ')
+    ) {
+        return '⚒';
+    }
+
+
+    if (
+        name.includes('ยานพาหนะ') ||
+        name.includes('รถ')
+    ) {
+        return '◉';
+    }
+
+
+    if (
+        name.includes('เซิร์ฟเวอร์') ||
+        name.includes('server')
+    ) {
+        return '◆';
+    }
+
+
+    return '◇';
+
+}
 
 function setActive(button) {
 
