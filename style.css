@@ -1,4 +1,3 @@
-```css
 /* =====================================================
    GLOBAL
    ===================================================== */
@@ -353,4 +352,382 @@ input {
 
 .status {
     margin-bottom: 7px;
-```
+
+    color: #777d87;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   RULE COUNT
+   ===================================================== */
+
+.rule-count {
+    margin-bottom: 16px;
+
+    color: #777d87;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   RULES CONTAINER
+   ===================================================== */
+
+.rules {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+/* =====================================================
+   RULE CARD
+   ===================================================== */
+
+.rule-card {
+    width: 100%;
+
+    padding: 22px 24px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e4e8;
+    border-radius: 10px;
+
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.025);
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   RULE CARD TITLE
+   ===================================================== */
+
+.rule-card h3 {
+    margin: 0 0 10px;
+
+    color: #17191d;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* =====================================================
+   RULE CARD DESCRIPTION
+   ===================================================== */
+
+.rule-card p {
+    margin: 0;
+
+    color: #555b64;
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    line-height: 1.8;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* =====================================================
+   RULE CARD - COMMON TEXT SUPPORT
+   ===================================================== */
+
+.rule-card div {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* =====================================================
+   LOADING
+   ===================================================== */
+
+.loading {
+    width: 100%;
+
+    padding: 40px 20px;
+
+    color: #777d87;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   EMPTY / NO RESULT
+   ===================================================== */
+
+.empty {
+    width: 100%;
+
+    padding: 40px 20px;
+
+    color: #777d87;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 170px;
+
+        padding-left: 40px;
+    }
+
+    #categoryMenu {
+        padding-left: 25px;
+    }
+
+    .category-btn {
+        width: calc(100% - 25px);
+    }
+
+    .main {
+        width: calc(100% - 170px);
+
+        margin-left: 170px;
+
+        padding: 40px 25px;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .rule-card {
+        padding: 20px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 650px) {
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+        height: auto;
+
+        padding: 16px;
+
+        border: none;
+
+        overflow: visible;
+    }
+
+
+    /* -------------------------------------------------
+       MOBILE LOGO
+       ------------------------------------------------- */
+
+    .logo {
+        padding: 4px 0 18px;
+
+        margin-bottom: 4px;
+    }
+
+    .logo img {
+        width: 125px;
+    }
+
+
+    /* -------------------------------------------------
+       MOBILE CATEGORY MENU
+       ------------------------------------------------- */
+
+    #categoryMenu {
+        display: flex;
+
+        flex-direction: row;
+
+        gap: 5px;
+
+        overflow-x: auto;
+
+        padding: 2px 0 5px;
+    }
+
+    #categoryMenu .menu-title {
+        display: none;
+    }
+
+    .category-btn {
+        width: auto;
+
+        min-width: max-content;
+        min-height: 38px;
+
+        padding: 9px 13px;
+
+        white-space: nowrap;
+    }
+
+    .category-btn:hover {
+        padding-left: 13px;
+    }
+
+    .category-btn.active {
+        padding-left: 13px;
+    }
+
+
+    /* -------------------------------------------------
+       MOBILE MAIN
+       ------------------------------------------------- */
+
+    .main {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 28px 16px 40px;
+    }
+
+
+    /* -------------------------------------------------
+       MOBILE HEADER
+       ------------------------------------------------- */
+
+    .page-header {
+        margin-bottom: 24px;
+    }
+
+    .header-label {
+        font-size: 10px;
+    }
+
+    .page-header h1 {
+        font-size: 26px;
+
+        letter-spacing: -0.5px;
+    }
+
+    .page-header p {
+        font-size: 13px;
+
+        line-height: 1.6;
+    }
+
+
+    /* -------------------------------------------------
+       MOBILE SEARCH
+       ------------------------------------------------- */
+
+    .search-box {
+        margin-bottom: 22px;
+    }
+
+    .search-box input {
+        height: 46px;
+
+        padding-left: 45px;
+    }
+
+
+    /* -------------------------------------------------
+       MOBILE RULE
+       ------------------------------------------------- */
+
+    .rules {
+        gap: 12px;
+    }
+
+    .rule-card {
+        padding: 18px 16px;
+
+        border-radius: 9px;
+    }
+
+    .rule-card h3 {
+        margin-bottom: 8px;
+
+        font-size: 15px;
+
+        line-height: 1.5;
+    }
+
+    .rule-card p {
+        font-size: 13px;
+
+        line-height: 1.8;
+    }
+
+    .status,
+    .rule-count {
+        font-size: 11px;
+    }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+   ===================================================== */
+
+@media (max-width: 400px) {
+
+    .main {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .rule-card {
+        padding: 16px 14px;
+    }
+
+    .rule-card h3 {
+        font-size: 14px;
+    }
+
+    .rule-card p {
+        font-size: 12.5px;
+    }
+}
