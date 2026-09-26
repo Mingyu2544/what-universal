@@ -1,53 +1,20 @@
 /* =====================================================
-   GLOBAL
-   ===================================================== */
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-
-    background: #f7f7f8;
-    color: #191c21;
-
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        "Noto Sans Thai",
-        Arial,
-        sans-serif;
-}
-
-button,
-input {
-    font-family: inherit;
-}
-
-
-/* =====================================================
-   SIDEBAR
+   SIDEBAR — INSPIRED
    ===================================================== */
 
 .sidebar {
     position: fixed;
-
     top: 0;
     left: 0;
 
-    width: 300px;
+    width: 270px;
     height: 100vh;
 
-    padding: 28px 20px 28px 100px;
+    padding: 28px 14px;
 
-    background: transparent;
-    border: none;
+    background: #111318;
+
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
 
     overflow-y: auto;
     overflow-x: hidden;
@@ -67,10 +34,8 @@ input {
     margin-bottom: 8px;
 
     background: transparent;
-
     border: none;
     border-radius: 0;
-
     box-shadow: none;
 
     text-align: center;
@@ -95,18 +60,13 @@ input {
 
 #categoryMenu {
     display: flex;
-
     flex-direction: column;
 
     gap: 3px;
-
-    padding-left: 45px;
-    padding-right: 0;
 }
 
 
 /* หมวดหัวข้อ */
-
 #categoryMenu .menu-title {
     display: block;
 
@@ -115,13 +75,12 @@ input {
     margin: 18px 0 7px;
     padding: 0 14px;
 
-    color: #555b64;
+    color: #686d76;
 
     font-size: 10px;
     font-weight: 700;
 
     letter-spacing: 1.4px;
-
     text-transform: uppercase;
 }
 
@@ -133,25 +92,26 @@ input {
 .category-btn {
     position: relative;
 
-    width: calc(100% - 45px);
+    width: 100%;
     min-height: 42px;
 
     display: flex;
     align-items: center;
 
     padding: 10px 14px;
+
     margin: 0;
 
-    border: 1px solid transparent;
+    border: 0;
     border-radius: 7px;
 
     background: transparent;
 
-    color: #3f444c;
+    color: #a9aeb7;
 
     font-family: inherit;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
 
     line-height: 1.3;
     text-align: left;
@@ -161,52 +121,49 @@ input {
     transition:
         background 0.18s ease,
         color 0.18s ease,
-        border-color 0.18s ease,
         padding-left 0.18s ease;
 }
 
 
-/* =====================================================
-   HOVER
-   ===================================================== */
-
+/* Hover */
 .category-btn:hover {
-    background: rgba(0, 0, 0, 0.045);
+    background: rgba(255, 255, 255, 0.055);
 
-    color: #17191d;
+    color: #ffffff;
 
     padding-left: 17px;
 }
 
 
-/* =====================================================
-   ACTIVE
-   ===================================================== */
-
+/* Active */
 .category-btn.active {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.10);
 
-    color: #3f444c;
+    color: #ffffff;
 
     font-weight: 600;
-
-    border: 1px solid #17191d;
-
-    box-shadow: none;
-
-    padding-left: 14px;
 }
 
 
-/* ปิดเส้นด้านซ้ายของ Active */
-
+/* เส้นเล็กด้านซ้ายของเมนูที่เลือก */
 .category-btn.active::before {
-    display: none;
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 9px;
+    bottom: 9px;
+
+    width: 2px;
+
+    background: #ffffff;
+
+    border-radius: 0 2px 2px 0;
 }
 
 
 /* ปิดจุดเดิม */
-
 .category-btn span {
     display: none !important;
 }
@@ -225,324 +182,17 @@ input {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.12);
-
+    background: rgba(255, 255, 255, 0.12);
     border-radius: 10px;
 }
 
 .sidebar::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.20);
+    background: rgba(255, 255, 255, 0.20);
 }
 
 
 /* =====================================================
-   MAIN CONTENT
-   ===================================================== */
-
-.main {
-    width: calc(100% - 300px);
-
-    margin-left: 300px;
-
-    min-height: 100vh;
-
-    padding: 50px 45px;
-}
-
-.container {
-    width: 100%;
-    max-width: 1100px;
-
-    margin: 0 auto;
-}
-
-
-/* =====================================================
-   PAGE HEADER
-   ===================================================== */
-
-.page-header {
-    margin-bottom: 30px;
-}
-
-.header-label {
-    margin-bottom: 8px;
-
-    color: #777d87;
-
-    font-size: 11px;
-    font-weight: 700;
-
-    letter-spacing: 1.8px;
-
-    text-transform: uppercase;
-}
-
-.page-header h1 {
-    margin: 0;
-
-    color: #17191d;
-
-    font-size: 32px;
-    font-weight: 800;
-
-    line-height: 1.2;
-
-    letter-spacing: -0.8px;
-}
-
-.page-header p {
-    margin: 9px 0 0;
-
-    color: #777d87;
-
-    font-size: 14px;
-
-    line-height: 1.7;
-}
-
-
-/* =====================================================
-   SEARCH
-   ===================================================== */
-
-.search-box {
-    position: relative;
-
-    margin-bottom: 28px;
-}
-
-.search-box input {
-    width: 100%;
-    height: 48px;
-
-    padding: 0 17px 0 50px;
-
-    border: 1px solid #e1e4e8;
-    border-radius: 10px;
-
-    background: #ffffff;
-
-    color: #20242a;
-
-    font-family: inherit;
-    font-size: 13px;
-
-    outline: none;
-
-    transition:
-        border-color 0.18s ease,
-        box-shadow 0.18s ease;
-}
-
-.search-box input:focus {
-    border-color: #cfd3d8;
-
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.025);
-}
-
-.search-box input::placeholder {
-    color: #a2a7af;
-}
-
-
-/* =====================================================
-   STATUS
-   ===================================================== */
-
-.status {
-    margin-bottom: 7px;
-
-    color: #777d87;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-}
-
-
-/* =====================================================
-   RULE COUNT
-   ===================================================== */
-
-.rule-count {
-    margin-bottom: 16px;
-
-    color: #777d87;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-}
-
-
-/* =====================================================
-   RULES CONTAINER
-   ===================================================== */
-
-.rules {
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 14px;
-}
-
-
-/* =====================================================
-   RULE CARD
-   ===================================================== */
-
-.rule-card {
-    width: 100%;
-
-    padding: 22px 24px;
-
-    background: #ffffff;
-
-    border: 1px solid #e1e4e8;
-    border-radius: 10px;
-
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.025);
-
-    overflow: hidden;
-}
-
-
-/* =====================================================
-   RULE CARD TITLE
-   ===================================================== */
-
-.rule-card h3 {
-    margin: 0 0 10px;
-
-    color: #17191d;
-
-    font-size: 16px;
-    font-weight: 700;
-
-    line-height: 1.5;
-
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
-
-
-/* =====================================================
-   RULE CARD DESCRIPTION
-   ===================================================== */
-
-.rule-card p {
-    margin: 0;
-
-    color: #555b64;
-
-    font-size: 14px;
-
-    font-weight: 400;
-
-    line-height: 1.8;
-
-    white-space: pre-wrap;
-
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
-
-
-/* =====================================================
-   RULE CARD - COMMON TEXT SUPPORT
-   ===================================================== */
-
-.rule-card div {
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
-
-
-/* =====================================================
-   LOADING
-   ===================================================== */
-
-.loading {
-    width: 100%;
-
-    padding: 40px 20px;
-
-    color: #777d87;
-
-    font-size: 13px;
-
-    line-height: 1.6;
-
-    text-align: center;
-}
-
-
-/* =====================================================
-   EMPTY / NO RESULT
-   ===================================================== */
-
-.empty {
-    width: 100%;
-
-    padding: 40px 20px;
-
-    color: #777d87;
-
-    font-size: 13px;
-
-    line-height: 1.6;
-
-    text-align: center;
-}
-
-
-/* =====================================================
-   TABLET
-   ===================================================== */
-
-@media (max-width: 900px) {
-
-    .sidebar {
-        width: 170px;
-
-        padding-left: 40px;
-    }
-
-    #categoryMenu {
-        padding-left: 25px;
-    }
-
-    .category-btn {
-        width: calc(100% - 25px);
-    }
-
-    .main {
-        width: calc(100% - 170px);
-
-        margin-left: 170px;
-
-        padding: 40px 25px;
-    }
-
-    .container {
-        max-width: 100%;
-    }
-
-    .page-header h1 {
-        font-size: 28px;
-    }
-
-    .rule-card {
-        padding: 20px;
-    }
-}
-
-
-/* =====================================================
-   MOBILE
+   MOBILE SIDEBAR
    ===================================================== */
 
 @media (max-width: 650px) {
@@ -555,34 +205,26 @@ input {
 
         padding: 16px;
 
-        border: none;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 
         overflow: visible;
     }
 
 
-    /* -------------------------------------------------
-       MOBILE LOGO
-       ------------------------------------------------- */
-
     .logo {
-        padding: 4px 0 18px;
-
-        margin-bottom: 4px;
+        padding: 4px 10px 18px;
+        margin-bottom: 5px;
     }
+
 
     .logo img {
         width: 125px;
     }
 
 
-    /* -------------------------------------------------
-       MOBILE CATEGORY MENU
-       ------------------------------------------------- */
-
     #categoryMenu {
         display: flex;
-
         flex-direction: row;
 
         gap: 5px;
@@ -592,14 +234,16 @@ input {
         padding: 2px 0 5px;
     }
 
+
     #categoryMenu .menu-title {
         display: none;
     }
 
+
     .category-btn {
         width: auto;
-
         min-width: max-content;
+
         min-height: 38px;
 
         padding: 9px 13px;
@@ -607,127 +251,18 @@ input {
         white-space: nowrap;
     }
 
+
     .category-btn:hover {
         padding-left: 13px;
     }
+
 
     .category-btn.active {
         padding-left: 13px;
     }
 
 
-    /* -------------------------------------------------
-       MOBILE MAIN
-       ------------------------------------------------- */
-
-    .main {
-        width: 100%;
-
-        margin-left: 0;
-
-        padding: 28px 16px 40px;
-    }
-
-
-    /* -------------------------------------------------
-       MOBILE HEADER
-       ------------------------------------------------- */
-
-    .page-header {
-        margin-bottom: 24px;
-    }
-
-    .header-label {
-        font-size: 10px;
-    }
-
-    .page-header h1 {
-        font-size: 26px;
-
-        letter-spacing: -0.5px;
-    }
-
-    .page-header p {
-        font-size: 13px;
-
-        line-height: 1.6;
-    }
-
-
-    /* -------------------------------------------------
-       MOBILE SEARCH
-       ------------------------------------------------- */
-
-    .search-box {
-        margin-bottom: 22px;
-    }
-
-    .search-box input {
-        height: 46px;
-
-        padding-left: 45px;
-    }
-
-
-    /* -------------------------------------------------
-       MOBILE RULE
-       ------------------------------------------------- */
-
-    .rules {
-        gap: 12px;
-    }
-
-    .rule-card {
-        padding: 18px 16px;
-
-        border-radius: 9px;
-    }
-
-    .rule-card h3 {
-        margin-bottom: 8px;
-
-        font-size: 15px;
-
-        line-height: 1.5;
-    }
-
-    .rule-card p {
-        font-size: 13px;
-
-        line-height: 1.8;
-    }
-
-    .status,
-    .rule-count {
-        font-size: 11px;
-    }
-}
-
-
-/* =====================================================
-   SMALL MOBILE
-   ===================================================== */
-
-@media (max-width: 400px) {
-
-    .main {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    .page-header h1 {
-        font-size: 24px;
-    }
-
-    .rule-card {
-        padding: 16px 14px;
-    }
-
-    .rule-card h3 {
-        font-size: 14px;
-    }
-
-    .rule-card p {
-        font-size: 12.5px;
+    .category-btn.active::before {
+        display: none;
     }
 }
