@@ -1,81 +1,104 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>WHAT UNIVERSAL</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
 <div class="app">
 
-    <!-- Sidebar -->
+
+    <!-- SIDEBAR -->
+
     <aside class="sidebar">
 
         <div class="logo">
-            <!-- เดี๋ยวเราจะใส่ Logo จริงตรงนี้ -->
-            <h2>WHAT<br>UNIVERSAL</h2>
+
+            <h2>
+                WHAT<br>
+                UNIVERSAL
+            </h2>
+
         </div>
+
 
         <div class="menu-title">
-            เมนู
+            หมวดหมู่
         </div>
 
-        <a href="#" class="menu-item active">
-            กฎเซิร์ฟเวอร์
-        </a>
 
-        <a href="#" class="menu-item">
-            กฎการ Roleplay
-        </a>
+        <!-- เมนูหมวดหมู่จะถูกสร้างจาก Google Sheets -->
 
-        <a href="#" class="menu-item">
-            กฎอาชีพ
-        </a>
+        <div id="categoryMenu">
 
-        <a href="#" class="menu-item">
-            กฎยานพาหนะ
-        </a>
+            <button
+                class="menu-item active"
+                data-category="all"
+            >
+                กฎทั้งหมด
+            </button>
 
-        <a href="#" class="menu-item">
-            กฎอื่น ๆ
-        </a>
+        </div>
+
 
         <div class="menu-title">
             ระบบ
         </div>
 
-        <a href="admin.html" class="menu-item">
+
+        <a
+            href="admin.html"
+            class="menu-item"
+        >
             ⚙ Admin
         </a>
 
     </aside>
 
 
-    <!-- Main Content -->
+
+    <!-- MAIN -->
+
     <main class="main">
 
         <div class="container">
 
-            <!-- Header -->
+
+            <!-- HEADER -->
+
             <header class="page-header">
 
                 <h1>
-                    กฎเซิร์ฟเวอร์
+                    WHAT UNIVERSAL
                 </h1>
 
                 <p>
-                    กฎและข้อบังคับสำหรับผู้เล่น WHAT UNIVERSAL
+                    กฎและข้อบังคับสำหรับผู้เล่น
                 </p>
 
             </header>
 
 
-            <!-- Search -->
+
+            <!-- SEARCH -->
+
             <div class="search-box">
 
                 <input
@@ -87,8 +110,33 @@
             </div>
 
 
-            <!-- Rules -->
-            <section id="rulesContainer" class="rules">
+
+            <!-- STATUS -->
+
+            <div
+                id="status"
+                class="status"
+            ></div>
+
+
+
+            <!-- RULE COUNT -->
+
+            <div
+                id="ruleCount"
+                class="rule-count"
+            >
+                กำลังโหลด...
+            </div>
+
+
+
+            <!-- RULES -->
+
+            <section
+                id="rulesContainer"
+                class="rules"
+            >
 
                 <div class="loading">
                     กำลังโหลดกฎ...
@@ -96,9 +144,11 @@
 
             </section>
 
+
         </div>
 
     </main>
+
 
 </div>
 
@@ -106,4 +156,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
