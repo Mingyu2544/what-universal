@@ -771,4 +771,23 @@ body {
         line-height: 1.7;
     }
 
+   /* ========================================
+   SIDEBAR MENU TITLE
+   ======================================== */
+
+#categoryMenu .menu-title {
+    display: block;
+    width: 100%;
+
+    margin: 18px 12px 6px;
+
+    color: #8e949d;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
 }
