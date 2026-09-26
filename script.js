@@ -4,48 +4,38 @@ const API_URL =
 let allRules = [];
 let currentCategory = "ทั้งหมด";
 
+function loadRules() {
+  const callbackName = "rulesCallback_" + Date.now();
 
-async function loadRules() {
+  window[callbackName] = function (data) {
 
-  try {
-
-    const response =
-      await fetch(API_URL);
-
-    if (!response.ok) {
-      throw new Error("โหลดข้อมูลไม่สำเร็จ");
-    }
-
-    const data =
-      await response.json();
-
-    allRules =
-      Array.isArray(data) ? data : [];
+    allRules = Array.isArray(data) ? data : [];
 
     buildCategoryMenu();
     render();
 
-  } catch (error) {
+    delete window[callbackName];
+  };
 
-    console.error(error);
+  const script = document.createElement("script");
 
-    const status =
-      document.getElementById("status");
+  script.src =
+    API_URL +
+    "?callback=" +
+    callbackName;
 
-    if (status) {
-      status.textContent =
-        "ไม่สามารถโหลดข้อมูลได้";
-    }
+  script.onerror = function () {
+    document.getElementById("status").textContent =
+      "ไม่สามารถโหลดข้อมูลได้";
+  };
 
-  }
-
+  document.body.appendChild(script);
 }
 
 
 function buildCategoryMenu() {
 
-  const menu =
-    document.getElementById("categoryMenu");
+  const menu = document.getElementById("categoryMenu");
 
   if (!menu) return;
 
@@ -60,11 +50,9 @@ function buildCategoryMenu() {
   menu.innerHTML = "";
 
 
-  const allButton =
-    document.createElement("button");
+  const allButton = document.createElement("button");
 
-  allButton.className =
-    "category-btn active";
+  allButton.className = "category-btn active";
 
   allButton.innerHTML =
     `<span>▦</span> กฎทั้งหมด`;
@@ -76,7 +64,6 @@ function buildCategoryMenu() {
     setActiveCategory(this);
 
     render();
-
   };
 
   menu.appendChild(allButton);
@@ -87,8 +74,7 @@ function buildCategoryMenu() {
     const button =
       document.createElement("button");
 
-    button.className =
-      "category-btn";
+    button.className = "category-btn";
 
     button.innerHTML =
       `<span>${getCategoryIcon(category)}</span> ${escapeHTML(category)}`;
@@ -100,7 +86,6 @@ function buildCategoryMenu() {
       setActiveCategory(this);
 
       render();
-
     };
 
     menu.appendChild(button);
@@ -146,7 +131,6 @@ function getCategoryIcon(category) {
   }
 
   return "◆";
-
 }
 
 
@@ -161,7 +145,6 @@ function setActiveCategory(activeButton) {
     });
 
   activeButton.classList.add("active");
-
 }
 
 
@@ -179,16 +162,15 @@ function render() {
   if (!container) return;
 
 
-  let rules =
-    allRules.filter(function (rule) {
+  let rules = allRules.filter(function (rule) {
 
-      if (currentCategory === "ทั้งหมด") {
-        return true;
-      }
+    if (currentCategory === "ทั้งหมด") {
+      return true;
+    }
 
-      return rule.category === currentCategory;
+    return rule.category === currentCategory;
 
-    });
+  });
 
 
   const searchInput =
@@ -202,30 +184,27 @@ function render() {
 
   if (search) {
 
-    rules =
-      rules.filter(function (rule) {
+    rules = rules.filter(function (rule) {
 
-        return (
+      return (
+        String(rule.title || "")
+          .toLowerCase()
+          .includes(search)
 
-          String(rule.title || "")
-            .toLowerCase()
-            .includes(search)
+        ||
 
-          ||
+        String(rule.body || "")
+          .toLowerCase()
+          .includes(search)
 
-          String(rule.body || "")
-            .toLowerCase()
-            .includes(search)
+        ||
 
-          ||
+        String(rule.category || "")
+          .toLowerCase()
+          .includes(search)
+      );
 
-          String(rule.category || "")
-            .toLowerCase()
-            .includes(search)
-
-        );
-
-      });
+    });
 
   }
 
@@ -242,13 +221,11 @@ function render() {
 
     container.innerHTML = `
       <div class="empty-state">
-
         <div class="empty-icon">⌕</div>
 
         <h3>ไม่พบกฎที่ค้นหา</h3>
 
         <p>ลองเปลี่ยนหมวดหมู่หรือคำค้นหา</p>
-
       </div>
     `;
 
@@ -257,7 +234,6 @@ function render() {
     }
 
     return;
-
   }
 
 
