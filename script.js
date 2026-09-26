@@ -257,6 +257,16 @@ function buildCategoryMenu() {
 
   menu.appendChild(homeButton);
 
+  const title =
+  document.createElement("div");
+
+title.className = "menu-title";
+
+title.textContent =
+  "หมวดหมู่";
+
+menu.appendChild(title);
+
 
   // =========================
   // RULE CATEGORIES
