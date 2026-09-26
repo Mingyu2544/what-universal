@@ -4,7 +4,7 @@ const SHEET_ID =
 const SHEET_NAME = "Rules";
 
 let allRules = [];
-let currentCategory = "ทั้งหมด";
+let currentCategory = "HOME";
 
 
 // ========================================
@@ -215,52 +215,39 @@ function parseCSV(text) {
 function buildCategoryMenu() {
 
   const menu =
-    document.getElementById(
-      "categoryMenu"
-    );
+    document.getElementById("categoryMenu");
 
   if (!menu) return;
 
-
   const categories = [
-
     ...new Set(
-
       allRules
-
         .map(function(rule) {
-
           return rule.category;
-
         })
-
         .filter(Boolean)
-
     )
-
   ];
-
 
   menu.innerHTML = "";
 
+  // =========================
+  // HOME PAGE
+  // =========================
 
-  const allButton =
+  const homeButton =
     document.createElement("button");
 
-
-  allButton.className =
+  homeButton.className =
     "category-btn active";
 
+  homeButton.innerHTML =
+    `<span>●</span> Home page`;
 
-  allButton.innerHTML =
-    `<span>▦</span> กฎทั้งหมด`;
-
-
-  allButton.onclick =
+  homeButton.onclick =
     function() {
 
-      currentCategory =
-        "ทั้งหมด";
+      currentCategory = "HOME";
 
       setActiveCategory(this);
 
@@ -268,9 +255,12 @@ function buildCategoryMenu() {
 
     };
 
+  menu.appendChild(homeButton);
 
-  menu.appendChild(allButton);
 
+  // =========================
+  // RULE CATEGORIES
+  // =========================
 
   categories.forEach(
     function(category) {
@@ -278,14 +268,11 @@ function buildCategoryMenu() {
       const button =
         document.createElement("button");
 
-
       button.className =
         "category-btn";
 
-
       button.innerHTML =
-        `<span>${getCategoryIcon(category)}</span> ${escapeHTML(category)}`;
-
+        `<span>●</span> ${escapeHTML(category)}`;
 
       button.onclick =
         function() {
@@ -299,14 +286,11 @@ function buildCategoryMenu() {
 
         };
 
-
       menu.appendChild(button);
 
     }
   );
-
 }
-
 
 // ========================================
 // Icon หมวดหมู่
@@ -352,35 +336,93 @@ function render() {
       "rulesContainer"
     );
 
-
   const status =
     document.getElementById(
       "status"
     );
-
 
   const count =
     document.getElementById(
       "ruleCount"
     );
 
-
   if (!container) return;
 
+
+  // =========================
+  // HOME PAGE
+  // =========================
+
+  if (currentCategory === "HOME") {
+
+    container.innerHTML = `
+      <div class="home-page">
+
+        <div class="home-label">
+          WHAT UNIVERSAL
+        </div>
+
+        <h2>
+          Welcome to WHAT UNIVERSAL
+        </h2>
+
+        <p>
+          ยินดีต้อนรับเข้าสู่เว็บไซต์ข้อมูลของเซิร์ฟเวอร์
+        </p>
+
+        <div class="home-grid">
+
+          <div class="home-card">
+            <div class="home-card-title">
+              Server Rules
+            </div>
+            <div class="home-card-text">
+              ศึกษากฎของเซิร์ฟเวอร์ก่อนเริ่มเล่น
+            </div>
+          </div>
+
+          <div class="home-card">
+            <div class="home-card-title">
+              Community
+            </div>
+            <div class="home-card-text">
+              พบปะและพูดคุยกับผู้เล่นภายในเซิร์ฟเวอร์
+            </div>
+          </div>
+
+          <div class="home-card">
+            <div class="home-card-title">
+              Information
+            </div>
+            <div class="home-card-text">
+              ข้อมูลและรายละเอียดต่าง ๆ ของเซิร์ฟเวอร์
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    `;
+
+    if (count) {
+      count.textContent = "";
+    }
+
+    if (status) {
+      status.textContent = "";
+    }
+
+    return;
+  }
+
+
+  // =========================
+  // RULE PAGE
+  // =========================
 
   let rules =
     allRules.filter(
       function(rule) {
-
-        if (
-          currentCategory ===
-          "ทั้งหมด"
-        ) {
-
-          return true;
-
-        }
-
 
         return (
           rule.category ===
@@ -395,7 +437,6 @@ function render() {
     document.getElementById(
       "searchInput"
     );
-
 
   const search =
     searchInput
@@ -412,7 +453,6 @@ function render() {
         function(rule) {
 
           return (
-
             String(
               rule.title || ""
             )
@@ -434,7 +474,6 @@ function render() {
             )
               .toLowerCase()
               .includes(search)
-
           );
 
         }
@@ -454,9 +493,7 @@ function render() {
   if (rules.length === 0) {
 
     container.innerHTML = `
-
       <div class="empty-state">
-
         <div class="empty-icon">
           ⌕
         </div>
@@ -468,31 +505,22 @@ function render() {
         <p>
           ลองเปลี่ยนหมวดหมู่หรือคำค้นหา
         </p>
-
       </div>
-
     `;
 
-
     if (status) {
-
       status.textContent = "";
-
     }
 
-
     return;
-
   }
 
 
   container.innerHTML =
-
     rules.map(
       function(rule, index) {
 
         return `
-
           <article class="rule-card">
 
             <div class="rule-number">
@@ -516,7 +544,6 @@ function render() {
             </div>
 
           </article>
-
         `;
 
       }
@@ -529,9 +556,7 @@ function render() {
       `แสดง ${rules.length} กฎ`;
 
   }
-
 }
-
 
 // ========================================
 // ป้องกัน HTML
