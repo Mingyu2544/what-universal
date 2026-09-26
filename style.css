@@ -43,8 +43,11 @@ body {
     position: fixed;
     top: 0;
     left: 0;
+
     width: 270px;
     height: 100vh;
+
+    padding: 28px 18px;
 
     background:
         linear-gradient(
@@ -56,26 +59,30 @@ body {
 
     border-right: 1px solid rgba(255, 255, 255, 0.06);
 
-    padding: 28px 18px;
-    box-sizing: border-box;
+    box-shadow:
+        4px 0 18px rgba(0, 0, 0, 0.08);
 
     overflow-y: auto;
+
     z-index: 100;
 }
+
 
 /* =====================================================
    LOGO
    ===================================================== */
 
 .logo {
-    padding: 18px 16px;
-    margin-bottom: 28px;
+    padding: 20px 18px;
+    margin-bottom: 24px;
 
     background: rgba(255, 255, 255, 0.035);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 14px;
 
-    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+
+    border-radius: 12px;
+
+    text-align: center;
 }
 
 .logo h2 {
@@ -83,24 +90,12 @@ body {
 
     color: #ffffff;
 
-    font-size: 21px;
-    line-height: 1.05;
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-}
-
-.logo h2 {
     font-size: 25px;
-    line-height: .95;
-
-    letter-spacing: 2px;
-
-    text-align: center;
+    line-height: 0.95;
 
     font-weight: 900;
 
-    color: #fff;
+    letter-spacing: 2px;
 }
 
 
@@ -123,17 +118,16 @@ body {
     display: block;
     width: 100%;
 
-    margin: 20px 12px 7px;
+    margin: 20px 0 8px;
+    padding-left: 14px;
 
     color: #777d87;
 
     font-size: 10px;
+    font-weight: 700;
 
-    font-weight: 800;
-
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-
-    letter-spacing: 1.8px;
 }
 
 
@@ -143,21 +137,22 @@ body {
 
 .category-btn {
     width: 100%;
+    min-height: 42px;
 
     display: flex;
     align-items: center;
-    gap: 12px;
 
-    padding: 11px 13px;
-    margin-bottom: 5px;
+    padding: 10px 14px;
+    margin-bottom: 4px;
 
     border: 0;
-    border-radius: 9px;
+    border-radius: 8px;
 
     background: transparent;
 
     color: #aeb3bc;
 
+    font-family: inherit;
     font-size: 13px;
     font-weight: 500;
 
@@ -172,8 +167,10 @@ body {
 }
 
 .category-btn:hover {
-    background: rgba(255, 255, 255, 0.055);
+    background: rgba(255, 255, 255, 0.05);
     color: #ffffff;
+
+    transform: translateX(2px);
 }
 
 .category-btn.active {
@@ -181,74 +178,11 @@ body {
     color: #ffffff;
 }
 
-.category-btn span {
-    width: 7px;
-    height: 7px;
 
-    flex-shrink: 0;
-
-    display: block;
-
-    border-radius: 50%;
-
-    background: #777d87;
-
-    font-size: 0;
-}
-
-.category-btn.active span {
-    background: #ffffff;
-}
-
-
-.category-btn:hover {
-    background: rgba(255,255,255,.055);
-
-    color: #fff;
-
-    transform: translateX(2px);
-}
-
-
-.category-btn.active {
-    background: #fff;
-
-    color: #17191d;
-
-    box-shadow:
-        0 8px 22px rgba(0,0,0,.18);
-}
-
+/* ซ่อน icon / จุดเดิมของเมนู */
 
 .category-btn span {
-    width: 25px;
-    height: 25px;
-
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    margin-right: 9px;
-
-    font-size: 9px;
-
-    flex-shrink: 0;
-
-    color: currentColor;
-
-    transition:
-        transform .2s ease;
-}
-
-
-.category-btn:hover span {
-    transform: scale(1.15);
-}
-
-
-.category-btn.active span {
-    color: #17191d;
+    display: none !important;
 }
 
 
@@ -267,9 +201,12 @@ body {
 }
 
 
+/* =====================================================
+   CONTAINER
+   ===================================================== */
+
 .container {
     width: 100%;
-
     max-width: 1100px;
 
     margin: 0 auto;
@@ -279,669 +216,6 @@ body {
 /* =====================================================
    PAGE HEADER
    ===================================================== */
-
-.page-header {
-    margin-bottom: 28px;
-}
-
-
-.header-label {
-    display: inline-flex;
-
-    align-items: center;
-
-    height: 26px;
-
-    padding: 0 10px;
-
-    margin-bottom: 13px;
-
-    border-radius: 7px;
-
-    background: #202329;
-
-    color: #fff;
-
-    font-size: 9px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.6px;
-}
-
-
-.page-header h1 {
-    font-size: 40px;
-
-    line-height: 1.15;
-
-    font-weight: 900;
-
-    letter-spacing: -1.3px;
-
-    color: #17191d;
-
-    margin-bottom: 9px;
-}
-
-
-.page-header p {
-    font-size: 14px;
-
-    color: #858b94;
-
-    line-height: 1.7;
-}
-
-
-/* =====================================================
-   SEARCH
-   ===================================================== */
-
-.search-box {
-    position: relative;
-
-    margin-bottom: 18px;
-}
-
-
-.search-box::before {
-    content: "⌕";
-
-    position: absolute;
-
-    left: 18px;
-    top: 50%;
-
-    transform: translateY(-52%);
-
-    font-size: 23px;
-
-    color: #9aa0a8;
-
-    pointer-events: none;
-
-    z-index: 2;
-}
-
-
-.search-box input {
-    width: 100%;
-
-    height: 54px;
-
-    padding: 0 20px 0 51px;
-
-    border-radius: 13px;
-
-    border: 1px solid #e2e5e8;
-
-    background: #fff;
-
-    color: #22262b;
-
-    font-family: inherit;
-
-    font-size: 14px;
-
-    outline: none;
-
-    box-shadow:
-        0 5px 20px rgba(20,30,40,.035);
-
-    transition:
-        border .2s ease,
-        box-shadow .2s ease;
-}
-
-
-.search-box input::placeholder {
-    color: #a1a6ad;
-}
-
-
-.search-box input:focus {
-    border-color: #b7bcc3;
-
-    box-shadow:
-        0 0 0 4px rgba(40,45,50,.045);
-}
-
-
-/* =====================================================
-   STATUS / COUNT
-   ===================================================== */
-
-.status {
-    font-size: 12px;
-
-    color: #8a9098;
-
-    margin-bottom: 7px;
-}
-
-
-.rule-count {
-    font-size: 12px;
-
-    color: #858b94;
-
-    margin-bottom: 17px;
-
-    font-weight: 600;
-}
-
-
-/* =====================================================
-   RULES
-   ===================================================== */
-
-.rules {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 12px;
-}
-
-
-/* =====================================================
-   RULE CARD
-   ===================================================== */
-
-.rule-card {
-    position: relative;
-
-    display: flex;
-
-    gap: 17px;
-
-    padding: 21px 22px;
-
-    background: #fff;
-
-    border: 1px solid #e8eaed;
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 5px 18px rgba(20,30,40,.035);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        border-color .2s ease;
-
-    overflow: hidden;
-}
-
-
-.rule-card:hover {
-    transform: translateY(-2px);
-
-    border-color: #d9dde2;
-
-    box-shadow:
-        0 12px 30px rgba(20,30,40,.075);
-}
-
-
-.rule-card::before {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 3px;
-    height: 100%;
-
-    background: #202329;
-
-    opacity: 0;
-
-    transition: opacity .2s ease;
-}
-
-
-.rule-card:hover::before {
-    opacity: 1;
-}
-
-
-/* =====================================================
-   RULE NUMBER
-   ===================================================== */
-
-.rule-number {
-    width: 40px;
-    height: 40px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    border-radius: 10px;
-
-    background: #202329;
-
-    color: #fff;
-
-    font-size: 11px;
-
-    font-weight: 800;
-}
-
-
-/* =====================================================
-   RULE CONTENT
-   ===================================================== */
-
-.rule-content {
-    min-width: 0;
-
-    flex: 1;
-}
-
-
-.rule-category {
-    display: inline-flex;
-
-    align-items: center;
-
-    min-height: 24px;
-
-    padding: 0 9px;
-
-    margin-bottom: 7px;
-
-    border-radius: 6px;
-
-    background: #f0f2f4;
-
-    color: #626871;
-
-    font-size: 9px;
-
-    font-weight: 700;
-
-    letter-spacing: .3px;
-}
-
-
-.rule-content h3 {
-    font-size: 17px;
-
-    font-weight: 800;
-
-    line-height: 1.4;
-
-    color: #1d2126;
-
-    margin-bottom: 7px;
-}
-
-
-.rule-content p {
-    font-size: 13px;
-
-    line-height: 1.8;
-
-    color: #666c74;
-
-    white-space: pre-line;
-}
-
-
-/* =====================================================
-   HOME PAGE
-   ===================================================== */
-
-.home-page {
-    width: 100%;
-}
-
-
-.home-label {
-    display: inline-flex;
-
-    align-items: center;
-
-    padding: 7px 10px;
-
-    margin-bottom: 14px;
-
-    border-radius: 7px;
-
-    background: #202329;
-
-    color: #fff;
-
-    font-size: 9px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-}
-
-
-.home-page h2 {
-    font-size: 36px;
-
-    line-height: 1.2;
-
-    font-weight: 900;
-
-    letter-spacing: -1px;
-
-    color: #17191d;
-
-    margin-bottom: 10px;
-}
-
-
-.home-page > p {
-    font-size: 14px;
-
-    color: #858b94;
-
-    line-height: 1.8;
-
-    margin-bottom: 30px;
-}
-
-
-/* =====================================================
-   HOME CARDS
-   ===================================================== */
-
-.home-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 14px;
-}
-
-
-.home-card {
-    padding: 24px;
-
-    min-height: 145px;
-
-    background: #fff;
-
-    border: 1px solid #e7e9ec;
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 5px 18px rgba(20,30,40,.035);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        border-color .2s ease;
-}
-
-
-.home-card:hover {
-    transform: translateY(-3px);
-
-    border-color: #d8dce1;
-
-    box-shadow:
-        0 12px 30px rgba(20,30,40,.08);
-}
-
-
-.home-card-title {
-    margin-bottom: 10px;
-
-    font-size: 16px;
-
-    font-weight: 800;
-
-    color: #1d2126;
-}
-
-
-.home-card-text {
-    font-size: 13px;
-
-    line-height: 1.8;
-
-    color: #777d85;
-}
-
-
-/* =====================================================
-   LOADING
-   ===================================================== */
-
-.loading {
-    padding: 55px 20px;
-
-    text-align: center;
-
-    color: #9298a0;
-
-    background: #fff;
-
-    border: 1px solid #e7e9ec;
-
-    border-radius: 15px;
-}
-
-
-/* =====================================================
-   EMPTY
-   ===================================================== */
-
-.empty-state {
-    padding: 65px 20px;
-
-    text-align: center;
-
-    background: #fff;
-
-    border: 1px solid #e7e9ec;
-
-    border-radius: 15px;
-
-    color: #9298a0;
-}
-
-
-.empty-icon {
-    font-size: 38px;
-
-    margin-bottom: 12px;
-
-    color: #a5aab1;
-}
-
-
-.empty-state h3 {
-    margin-bottom: 6px;
-
-    font-size: 18px;
-
-    color: #4d535b;
-}
-
-
-.empty-state p {
-    font-size: 13px;
-
-    color: #969ca4;
-}
-
-
-/* =====================================================
-   SCROLLBAR
-   ===================================================== */
-
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-
-::-webkit-scrollbar-track {
-    background: #f5f6f8;
-}
-
-
-::-webkit-scrollbar-thumb {
-    background: #c9cdd2;
-
-    border-radius: 20px;
-}
-
-
-::-webkit-scrollbar-thumb:hover {
-    background: #aeb3ba;
-}
-
-
-/* =====================================================
-   MOBILE
-   ===================================================== */
-
-@media (max-width: 850px) {
-
-    .sidebar {
-        width: 220px;
-    }
-
-
-    .main {
-        width: calc(100% - 220px);
-
-        margin-left: 220px;
-
-        padding: 40px 25px;
-    }
-
-
-    .home-grid {
-        grid-template-columns:
-            1fr;
-    }
-
-}
-
-
-@media (max-width: 650px) {
-
-    .app {
-        display: block;
-    }
-
-
-    .sidebar {
-        position: relative;
-
-        width: 100%;
-
-        min-height: auto;
-
-        padding: 18px;
-
-        box-shadow:
-            0 5px 20px rgba(0,0,0,.08);
-    }
-
-
-    .logo {
-        min-height: 85px;
-
-        margin-bottom: 15px;
-    }
-
-
-    .logo h2 {
-        font-size: 22px;
-    }
-
-
-    #categoryMenu .menu-title {
-        margin-top: 15px;
-    }
-
-
-    #categoryMenu {
-        gap: 5px;
-    }
-
-
-    .category-btn {
-        padding: 11px 12px;
-    }
-
-
-    .main {
-        width: 100%;
-
-        margin-left: 0;
-
-        padding: 30px 16px;
-    }
-
-
-    .page-header h1 {
-        font-size: 28px;
-    }
-
-
-    .home-page h2 {
-        font-size: 28px;
-    }
-
-
-    .home-grid {
-        grid-template-columns: 1fr;
-    }
-
-
-    .rule-card {
-        gap: 13px;
-
-        padding: 19px;
-    }
-
-
-    .rule-number {
-        width: 36px;
-        height: 36px;
-
-        border-radius: 9px;
-
-        font-size: 10px;
-    }
-
-
-    .rule-content h3 {
-        font-size: 17px;
-    }
-
-
-    .rule-content p {
-        font-size: 13px;
-
-        line-height: 1.7;
-    }
-
-}
-
-.category-btn span {
-    display: none !important;
-}
 
 .page-header {
     margin-bottom: 30px;
@@ -967,6 +241,8 @@ body {
     font-size: 32px;
     font-weight: 800;
 
+    line-height: 1.2;
+
     letter-spacing: -0.8px;
 }
 
@@ -976,19 +252,45 @@ body {
     color: #777d87;
 
     font-size: 14px;
+
+    line-height: 1.7;
 }
 
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
 .search-box {
+    position: relative;
+
     margin-bottom: 28px;
+}
+
+.search-box::before {
+    content: "⌕";
+
+    position: absolute;
+
+    left: 18px;
+    top: 50%;
+
+    transform: translateY(-52%);
+
+    color: #9aa0a8;
+
+    font-size: 23px;
+
+    pointer-events: none;
+
+    z-index: 2;
 }
 
 .search-box input {
     width: 100%;
     height: 48px;
 
-    padding: 0 17px;
-
-    box-sizing: border-box;
+    padding: 0 17px 0 50px;
 
     border: 1px solid #e1e4e8;
     border-radius: 10px;
@@ -997,6 +299,7 @@ body {
 
     color: #20242a;
 
+    font-family: inherit;
     font-size: 13px;
 
     outline: none;
@@ -1017,18 +320,54 @@ body {
         0 0 0 3px rgba(0, 0, 0, 0.04);
 }
 
-.search-box {
-    position: relative;
+
+/* =====================================================
+   STATUS / COUNT
+   ===================================================== */
+
+.status {
+    margin-bottom: 7px;
+
+    color: #8a9098;
+
+    font-size: 12px;
 }
 
-.search-box input {
+.rule-count {
+    margin-bottom: 17px;
+
+    color: #858b94;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   RULES
+   ===================================================== */
+
+.rules {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+/* =====================================================
+   RULE CARD
+   ===================================================== */
 
 .rule-card {
+    position: relative;
+
     display: flex;
+
     gap: 18px;
 
     padding: 22px 24px;
-    margin-bottom: 14px;
+    margin-bottom: 2px;
 
     background: #ffffff;
 
@@ -1042,6 +381,8 @@ body {
         transform 0.2s ease,
         box-shadow 0.2s ease,
         border-color 0.2s ease;
+
+    overflow: hidden;
 }
 
 .rule-card:hover {
@@ -1053,6 +394,32 @@ body {
         0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
+.rule-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background: #202329;
+
+    opacity: 0;
+
+    transition: opacity 0.2s ease;
+}
+
+.rule-card:hover::before {
+    opacity: 1;
+}
+
+
+/* =====================================================
+   RULE NUMBER
+   ===================================================== */
 
 .rule-number {
     width: 34px;
@@ -1075,10 +442,14 @@ body {
 }
 
 
+/* =====================================================
+   RULE CONTENT
+   ===================================================== */
+
 .rule-content {
     min-width: 0;
+    flex: 1;
 }
-
 
 .rule-category {
     margin-bottom: 5px;
@@ -1092,7 +463,6 @@ body {
     text-transform: uppercase;
 }
 
-
 .rule-content h3 {
     margin: 0 0 8px;
 
@@ -1104,7 +474,6 @@ body {
     line-height: 1.4;
 }
 
-
 .rule-content p {
     margin: 0;
 
@@ -1112,9 +481,14 @@ body {
 
     font-size: 13px;
     line-height: 1.7;
+
+    white-space: pre-line;
 }
-    padding-left: 50px !important;
-}
+
+
+/* =====================================================
+   HOME PAGE
+   ===================================================== */
 
 .home-page {
     padding: 10px 0 40px;
@@ -1140,6 +514,8 @@ body {
     font-size: 34px;
     font-weight: 800;
 
+    line-height: 1.2;
+
     letter-spacing: -1px;
 }
 
@@ -1155,6 +531,10 @@ body {
 }
 
 
+/* =====================================================
+   HOME CARDS
+   ===================================================== */
+
 .home-grid {
     display: grid;
 
@@ -1163,7 +543,6 @@ body {
 
     gap: 16px;
 }
-
 
 .home-card {
     padding: 24px;
@@ -1191,7 +570,6 @@ body {
         0 8px 20px rgba(0, 0, 0, 0.06);
 }
 
-
 .home-card-title {
     margin-bottom: 10px;
 
@@ -1208,89 +586,140 @@ body {
     line-height: 1.7;
 }
 
-.sidebar {
-    box-shadow:
-        4px 0 18px rgba(0, 0, 0, 0.08);
-}
 
+/* =====================================================
+   LOADING
+   ===================================================== */
 
-/* Logo */
-.logo {
-    padding: 20px 18px;
-    margin-bottom: 24px;
+.loading {
+    padding: 60px 20px;
 
-    background: rgba(255, 255, 255, 0.035);
+    text-align: center;
 
-    border: 1px solid rgba(255, 255, 255, 0.06);
-
-    border-radius: 12px;
-}
-
-.logo h2 {
-    margin: 0;
-
-    color: #ffffff;
-
-    font-size: 21px;
-    line-height: 1.05;
-
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-}
-
-
-/* เมนู */
-.category-btn {
-    min-height: 42px;
-
-    padding: 10px 14px;
-
-    margin-bottom: 4px;
-
-    border-radius: 8px;
-
-    color: #aeb3bc;
+    color: #9298a1;
 
     font-size: 13px;
-    font-weight: 500;
 
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
+    background: #ffffff;
+
+    border: 1px solid #e6e8eb;
+    border-radius: 12px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.025);
 }
 
-.category-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
+.loading::before {
+    content: "";
 
-    color: #ffffff;
+    display: block;
+
+    width: 22px;
+    height: 22px;
+
+    margin: 0 auto 14px;
+
+    border: 2px solid #e5e7ea;
+    border-top-color: #777d87;
+
+    border-radius: 50%;
+
+    animation:
+        loadingSpin 0.8s linear infinite;
 }
 
-.category-btn.active {
-    background: rgba(255, 255, 255, 0.09);
+@keyframes loadingSpin {
+    from {
+        transform: rotate(0deg);
+    }
 
-    color: #ffffff;
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 
-/* หัวข้อหมวดหมู่ */
-#categoryMenu .menu-title {
-    margin-top: 20px;
-    margin-bottom: 8px;
-    padding-left: 14px;
+/* =====================================================
+   EMPTY STATE
+   ===================================================== */
+
+.empty-state {
+    padding: 70px 20px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #e6e8eb;
+    border-radius: 12px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.025);
+}
+
+.empty-icon {
+    width: 48px;
+    height: 48px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #f1f2f4;
 
     color: #777d87;
 
-    font-size: 10px;
-    font-weight: 700;
-
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+    font-size: 22px;
 }
 
-/* ========================================
-   RESPONSIVE — TABLET
-======================================== */
+.empty-state h3 {
+    margin: 0 0 7px;
+
+    color: #191c21;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.empty-state p {
+    margin: 0;
+
+    color: #9298a1;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f5f6f8;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c9cdd2;
+
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #aeb3ba;
+}
+
+
+/* =====================================================
+   TABLET
+   ===================================================== */
 
 @media (max-width: 900px) {
 
@@ -1299,27 +728,32 @@ body {
     }
 
     .main {
+        width: calc(100% - 220px);
+
         margin-left: 220px;
+
+        padding: 40px 25px;
     }
 
     .container {
-        padding: 36px 28px;
+        padding: 0 3px;
     }
 
     .home-grid {
         grid-template-columns: 1fr;
     }
-
 }
 
 
-/* ========================================
-   RESPONSIVE — MOBILE
-======================================== */
+/* =====================================================
+   MOBILE
+   ===================================================== */
 
 @media (max-width: 650px) {
 
-    /* Sidebar */
+    .app {
+        display: block;
+    }
 
     .sidebar {
         position: relative;
@@ -1333,10 +767,9 @@ body {
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 
         box-shadow: none;
+
+        overflow: visible;
     }
-
-
-    /* Logo */
 
     .logo {
         margin-bottom: 14px;
@@ -1346,9 +779,6 @@ body {
     .logo h2 {
         font-size: 18px;
     }
-
-
-    /* Menu */
 
     #categoryMenu {
         display: flex;
@@ -1362,9 +792,12 @@ body {
         padding-bottom: 4px;
     }
 
+    #categoryMenu .menu-title {
+        display: none;
+    }
+
     .category-btn {
         width: auto;
-
         min-width: max-content;
 
         margin-bottom: 0;
@@ -1374,31 +807,17 @@ body {
         white-space: nowrap;
     }
 
-
-    /* Category title */
-
-    #categoryMenu .menu-title {
-        display: none;
-    }
-
-
-    /* Main */
-
     .main {
+        width: 100%;
+
         margin-left: 0;
 
-        width: 100%;
-    }
-
-
-    /* Container */
-
-    .container {
         padding: 28px 16px 40px;
     }
 
-
-    /* Header */
+    .container {
+        padding: 0;
+    }
 
     .page-header {
         margin-bottom: 22px;
@@ -1412,9 +831,6 @@ body {
         font-size: 13px;
     }
 
-
-    /* Search */
-
     .search-box {
         margin-bottom: 22px;
     }
@@ -1424,9 +840,6 @@ body {
 
         font-size: 13px;
     }
-
-
-    /* Rules */
 
     .rule-card {
         gap: 13px;
@@ -1452,9 +865,6 @@ body {
 
         line-height: 1.7;
     }
-
-
-    /* Home */
 
     .home-page {
         padding-top: 4px;
@@ -1482,23 +892,19 @@ body {
         padding: 19px;
     }
 
-
-    /* Rule count */
-
     .rule-count {
         font-size: 11px;
     }
-
 }
 
 
-/* ========================================
+/* =====================================================
    VERY SMALL MOBILE
-======================================== */
+   ===================================================== */
 
 @media (max-width: 400px) {
 
-    .container {
+    .main {
         padding-left: 13px;
         padding-right: 13px;
     }
@@ -1514,45 +920,4 @@ body {
     .rule-card {
         padding: 14px;
     }
-
-   .loading {
-    padding: 60px 20px;
-
-    text-align: center;
-
-    color: #9298a1;
-
-    font-size: 13px;
-}
-
-.loading::before {
-    content: "";
-
-    display: block;
-
-    width: 22px;
-    height: 22px;
-
-    margin: 0 auto 14px;
-
-    border: 2px solid #e5e7ea;
-    border-top-color: #777d87;
-
-    border-radius: 50%;
-
-    animation: loadingSpin 0.8s linear infinite;
-}
-
-@keyframes loadingSpin {
-
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-
-}
-
 }
