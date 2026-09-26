@@ -664,3 +664,45 @@ body {
 
     color: #7b8189;
 }
+
+/* =====================================================
+   MENU ICON
+   ===================================================== */
+
+.menu-icon {
+    width: 28px;
+    height: 28px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 10px;
+
+    border-radius: 8px;
+
+    background: rgba(255,255,255,0.06);
+
+    font-size: 14px;
+
+    flex-shrink: 0;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.menu-item:hover .menu-icon {
+    background: rgba(255,255,255,0.12);
+
+    transform: scale(1.05);
+}
+
+
+.menu-item.active .menu-icon {
+    background: #202329;
+
+    color: #ffffff;
+}
