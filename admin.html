@@ -63,8 +63,7 @@
         }
 
         .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group textarea {
 
             width: 100%;
 
@@ -95,8 +94,7 @@
         }
 
         .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-group textarea:focus {
 
             border-color: #9da4ad;
 
@@ -152,7 +150,51 @@
             color: #555b63;
         }
 
+        .admin-button:disabled {
+            opacity: .55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .admin-message {
+
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 13px 15px;
+
+            border-radius: 11px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .admin-message.success {
+
+            display: block;
+
+            background: #eef8f1;
+
+            color: #287a43;
+
+            border: 1px solid #ccebd5;
+        }
+
+        .admin-message.error {
+
+            display: block;
+
+            background: #fff1f1;
+
+            color: #a33a3a;
+
+            border: 1px solid #f0cccc;
+        }
+
         .admin-back {
+
             display: inline-flex;
 
             align-items: center;
@@ -269,7 +311,7 @@
                     </h1>
 
                     <p>
-                        จัดการข้อมูลกฎของ WHAT UNIVERSAL
+                        เพิ่มกฎใหม่เข้าสู่ระบบ
                     </p>
 
                 </header>
@@ -285,11 +327,14 @@
 
 
                     <div class="admin-description">
-                        แบบฟอร์มสำหรับจัดการข้อมูลกฎเซิร์ฟเวอร์
+                        ข้อมูลที่บันทึกจะถูกเพิ่มลงใน Google Sheets
                     </div>
 
 
-                    <form class="admin-form">
+                    <form
+                        id="adminForm"
+                        class="admin-form"
+                    >
 
 
                         <div class="form-group">
@@ -299,8 +344,10 @@
                             </label>
 
                             <input
+                                id="category"
                                 type="text"
                                 placeholder="เช่น กฎเซิร์ฟเวอร์"
+                                required
                             >
 
                         </div>
@@ -313,8 +360,10 @@
                             </label>
 
                             <input
+                                id="title"
                                 type="text"
                                 placeholder="ชื่อหัวข้อกฎ"
+                                required
                             >
 
                         </div>
@@ -327,7 +376,9 @@
                             </label>
 
                             <textarea
+                                id="body"
                                 placeholder="รายละเอียดของกฎ"
+                                required
                             ></textarea>
 
                         </div>
@@ -340,8 +391,9 @@
                             </label>
 
                             <input
+                                id="order"
                                 type="number"
-                                placeholder="เช่น 1"
+                                placeholder="เช่น 4"
                             >
 
                         </div>
@@ -350,7 +402,8 @@
                         <div class="admin-actions">
 
                             <button
-                                type="button"
+                                id="saveButton"
+                                type="submit"
                                 class="admin-button primary"
                             >
                                 บันทึกกฎ
@@ -370,6 +423,12 @@
                     </form>
 
 
+                    <div
+                        id="message"
+                        class="admin-message"
+                    ></div>
+
+
                 </div>
 
 
@@ -381,6 +440,133 @@
 
 
 </div>
+
+
+
+<script>
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuJwJ6vjNmise3J_MLpT5D_U-rLF-4/exec";
+
+
+const form =
+    document.getElementById("adminForm");
+
+const message =
+    document.getElementById("message");
+
+const saveButton =
+    document.getElementById("saveButton");
+
+
+function showMessage(text, type) {
+
+    message.textContent = text;
+
+    message.className =
+        "admin-message " + type;
+
+}
+
+
+form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+
+    const category =
+        document.getElementById("category").value.trim();
+
+    const title =
+        document.getElementById("title").value.trim();
+
+    const body =
+        document.getElementById("body").value.trim();
+
+    const order =
+        document.getElementById("order").value;
+
+
+    if (!category || !title || !body) {
+
+        showMessage(
+            "กรุณากรอกข้อมูลให้ครบ",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    saveButton.disabled = true;
+
+    saveButton.textContent =
+        "กำลังบันทึก...";
+
+
+    const data = {
+
+        action: "add",
+
+        category: category,
+
+        title: title,
+
+        body: body,
+
+        order: order
+
+    };
+
+
+    try {
+
+        await fetch(API_URL, {
+
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+
+                "Content-Type":
+                    "text/plain;charset=utf-8"
+
+            },
+
+            body: JSON.stringify(data)
+
+        });
+
+
+        showMessage(
+            "ส่งคำขอบันทึกแล้ว กรุณาตรวจสอบ Google Sheets",
+            "success"
+        );
+
+
+        form.reset();
+
+
+    } catch (error) {
+
+        showMessage(
+            "เกิดข้อผิดพลาดในการส่งข้อมูล",
+            "error"
+        );
+
+    }
+
+
+    saveButton.disabled = false;
+
+    saveButton.textContent =
+        "บันทึกกฎ";
+
+});
+
+</script>
 
 
 </body>
