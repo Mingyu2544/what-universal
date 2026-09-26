@@ -260,7 +260,6 @@
 
 </div>
 
-
 <script>
 const API_URL =
     "https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuWjJ6vjNmise3J_MLpT5D_U-rLF-4/exec";
@@ -298,43 +297,77 @@ form.addEventListener("submit", function(event) {
     saveButton.disabled = true;
     saveButton.textContent = "กำลังบันทึก...";
 
-    const url =
-        API_URL +
-        "?action=add" +
-        "&category=" + encodeURIComponent(category) +
-        "&title=" + encodeURIComponent(title) +
-        "&body=" + encodeURIComponent(body) +
-        "&order=" + encodeURIComponent(order) +
-        "&t=" + Date.now();
+    const callbackName =
+        "addRule_" + Date.now();
 
-    const iframe = document.createElement("iframe");
+    window[callbackName] = function(result) {
 
-    iframe.style.display = "none";
-    iframe.src = url;
+        if (result && result.success) {
 
-    document.body.appendChild(iframe);
+            showMessage(
+                "เพิ่มกฎสำเร็จแล้ว",
+                "success"
+            );
 
-    setTimeout(function() {
+            form.reset();
 
-        showMessage(
-            "ส่งข้อมูลเรียบร้อยแล้ว กรุณาตรวจสอบข้อมูลในระบบ",
-            "success"
-        );
+            document.getElementById("order").value = "1";
 
-        form.reset();
+        } else {
 
-        document.getElementById("order").value = "1";
+            showMessage(
+                result && result.message
+                    ? result.message
+                    : "บันทึกไม่สำเร็จ",
+                "error"
+            );
+        }
 
         saveButton.disabled = false;
         saveButton.textContent = "บันทึกกฎ";
 
-        setTimeout(function() {
-            iframe.remove();
-        }, 1000);
+        delete window[callbackName];
 
-    }, 2000);
+        if (script) {
+            script.remove();
+        }
+    };
 
+    const script =
+        document.createElement("script");
+
+    script.src =
+        API_URL +
+        "?action=add" +
+        "&category=" +
+        encodeURIComponent(category) +
+        "&title=" +
+        encodeURIComponent(title) +
+        "&body=" +
+        encodeURIComponent(body) +
+        "&order=" +
+        encodeURIComponent(order) +
+        "&callback=" +
+        callbackName;
+
+    script.onerror = function() {
+
+        showMessage(
+            "ไม่สามารถเชื่อมต่อกับระบบได้",
+            "error"
+        );
+
+        saveButton.disabled = false;
+        saveButton.textContent = "บันทึกกฎ";
+
+        delete window[callbackName];
+
+        script.remove();
+    };
+
+    document.body.appendChild(script);
 });
 </script>
+    
 </body>
 </html>
