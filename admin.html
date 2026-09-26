@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>WHAT UNIVERSAL — Admin</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        .admin-page {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .admin-card {
+            background: #ffffff;
+            border: 1px solid #e7e9ec;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow:
+                0 8px 25px rgba(20,30,40,.04);
+        }
+
+        .admin-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1d2126;
+            margin-bottom: 6px;
+        }
+
+        .admin-description {
+            font-size: 14px;
+            color: #7b8189;
+            margin-bottom: 25px;
+        }
+
+        .admin-form {
+            display: grid;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 7px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #454b53;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+
+            width: 100%;
+
+            border: 1px solid #dfe3e7;
+
+            border-radius: 11px;
+
+            padding: 12px 14px;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: #ffffff;
+
+            color: #20242a;
+
+            transition:
+                border .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+
+            border-color: #9da4ad;
+
+            box-shadow:
+                0 0 0 4px rgba(40,45,50,.06);
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .admin-button {
+
+            border: none;
+
+            border-radius: 11px;
+
+            padding: 12px 20px;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .admin-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .admin-button.primary {
+
+            background: #202329;
+
+            color: #ffffff;
+
+            box-shadow:
+                0 7px 18px rgba(0,0,0,.12);
+        }
+
+        .admin-button.secondary {
+
+            background: #f0f2f4;
+
+            color: #555b63;
+        }
+
+        .admin-back {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-bottom: 20px;
+
+            color: #666c74;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .admin-back:hover {
+            color: #17191d;
+        }
+
+        @media (max-width: 650px) {
+
+            .admin-card {
+                padding: 20px;
+            }
+
+            .admin-actions {
+                flex-direction: column;
+            }
+
+            .admin-button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>
+                WHAT<br>
+                UNIVERSAL
+            </h2>
+
+        </div>
+
+
+        <div class="menu-title">
+            ระบบ
+        </div>
+
+
+        <a
+            href="index.html"
+            class="category-btn"
+        >
+
+            <span>←</span>
+
+            กลับหน้ากฎ
+
+        </a>
+
+
+        <div class="menu-title">
+            Admin
+        </div>
+
+
+        <div class="category-btn active">
+
+            <span>⚙</span>
+
+            จัดการกฎ
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="container">
+
+            <div class="admin-page">
+
+
+                <header class="page-header">
+
+                    <div class="header-label">
+                        ADMIN PANEL
+                    </div>
+
+                    <h1>
+                        จัดการกฎ
+                    </h1>
+
+                    <p>
+                        จัดการข้อมูลกฎของ WHAT UNIVERSAL
+                    </p>
+
+                </header>
+
+
+
+                <div class="admin-card">
+
+
+                    <div class="admin-title">
+                        เพิ่มกฎใหม่
+                    </div>
+
+
+                    <div class="admin-description">
+                        แบบฟอร์มสำหรับจัดการข้อมูลกฎเซิร์ฟเวอร์
+                    </div>
+
+
+                    <form class="admin-form">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                หมวดหมู่
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="เช่น กฎเซิร์ฟเวอร์"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                หัวข้อ
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="ชื่อหัวข้อกฎ"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                รายละเอียด
+                            </label>
+
+                            <textarea
+                                placeholder="รายละเอียดของกฎ"
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                ลำดับ
+                            </label>
+
+                            <input
+                                type="number"
+                                placeholder="เช่น 1"
+                            >
+
+                        </div>
+
+
+                        <div class="admin-actions">
+
+                            <button
+                                type="button"
+                                class="admin-button primary"
+                            >
+                                บันทึกกฎ
+                            </button>
+
+
+                            <button
+                                type="reset"
+                                class="admin-button secondary"
+                            >
+                                ล้างข้อมูล
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>
