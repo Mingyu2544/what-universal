@@ -49,17 +49,17 @@ body {
 
     padding: 28px 18px;
 
-    background: rgba(25, 27, 32, 0.82);
+    background: rgba(25, 27, 32, 0.92);
 
-backdrop-filter: blur(20px);
--webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
 
-border-right: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
 
     color: #fff;
 
     box-shadow:
-        8px 0 30px rgba(0, 0, 0, 0.08);
+        8px 0 30px rgba(0, 0, 0, 0.18);
 
     z-index: 100;
 }
