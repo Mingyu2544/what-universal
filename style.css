@@ -56,7 +56,7 @@ body {
             #202329 100%
         );
 
-    color: #ffffff;
+    color: #fff;
 
     box-shadow:
         8px 0 30px rgba(0, 0, 0, 0.08);
@@ -92,7 +92,7 @@ body {
 
 .logo h2 {
     font-size: 25px;
-    line-height: 0.95;
+    line-height: .95;
     letter-spacing: 2px;
     text-align: center;
     font-weight: 900;
@@ -100,13 +100,11 @@ body {
 
 
 /* =====================================================
-   MENU
+   MENU TITLE
    ===================================================== */
 
 .menu-title {
-    margin:
-
-        24px 12px 10px;
+    margin: 24px 12px 10px;
 
     font-size: 11px;
 
@@ -120,60 +118,109 @@ body {
 }
 
 
-.menu-item {
+/* =====================================================
+   CATEGORY MENU
+   ===================================================== */
+
+#categoryMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+/* ปุ่มหมวดหมู่ */
+
+.category-btn {
     width: 100%;
 
     display: flex;
     align-items: center;
 
-    padding: 13px 15px;
-
-    margin-bottom: 6px;
-
-    border-radius: 12px;
+    padding: 12px 13px;
 
     border: none;
+    border-radius: 12px;
 
     background: transparent;
 
     color: #b8bdc5;
 
+    font-family: inherit;
     font-size: 14px;
-
     font-weight: 600;
 
-    text-decoration: none;
+    text-align: left;
 
     cursor: pointer;
 
     transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
 }
 
 
-.menu-item:hover {
-    background: rgba(255,255,255,0.07);
+.category-btn:hover {
+    background: rgba(255,255,255,.07);
 
-    color: #ffffff;
+    color: #fff;
 
     transform: translateX(3px);
 }
 
 
-.menu-item.active {
+.category-btn.active {
     background:
         linear-gradient(
             135deg,
-            #ffffff,
+            #fff,
             #e9edf2
         );
 
     color: #17191d;
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,0.18);
+        0 8px 20px rgba(0,0,0,.18);
+}
+
+
+.category-btn span {
+    width: 28px;
+    height: 28px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 10px;
+
+    border-radius: 8px;
+
+    background: rgba(255,255,255,.06);
+
+    font-size: 14px;
+
+    flex-shrink: 0;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+
+.category-btn:hover span {
+    background: rgba(255,255,255,.12);
+
+    transform: scale(1.05);
+}
+
+
+.category-btn.active span {
+    background: #202329;
+
+    color: #fff;
 }
 
 
@@ -194,6 +241,7 @@ body {
 
 .container {
     width: 100%;
+
     max-width: 1100px;
 
     margin: 0 auto;
@@ -209,12 +257,39 @@ body {
 }
 
 
+.header-label {
+    display: inline-flex;
+
+    align-items: center;
+
+    height: 28px;
+
+    padding: 0 11px;
+
+    margin-bottom: 12px;
+
+    border-radius: 8px;
+
+    background: #202329;
+
+    color: #fff;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
 .page-header h1 {
-    font-size: 36px;
+    font-size: 40px;
+
+    line-height: 1.2;
 
     font-weight: 900;
 
-    letter-spacing: -1px;
+    letter-spacing: -1.2px;
 
     color: #17191d;
 
@@ -225,7 +300,9 @@ body {
 .page-header p {
     font-size: 15px;
 
-    color: #777d86;
+    margin-top: 5px;
+
+    color: #7b8189;
 }
 
 
@@ -255,6 +332,8 @@ body {
     color: #9aa0a8;
 
     pointer-events: none;
+
+    z-index: 2;
 }
 
 
@@ -263,27 +342,28 @@ body {
 
     height: 56px;
 
-    padding:
-        0 20px 0 52px;
+    padding: 0 20px 0 52px;
 
     border-radius: 15px;
 
     border: 1px solid #e1e4e8;
 
-    background: #ffffff;
+    background: #fff;
 
     color: #22262b;
+
+    font-family: inherit;
 
     font-size: 14px;
 
     outline: none;
 
     box-shadow:
-        0 5px 20px rgba(20,30,40,0.04);
+        0 5px 20px rgba(20,30,40,.04);
 
     transition:
-        border 0.2s ease,
-        box-shadow 0.2s ease;
+        border .2s ease,
+        box-shadow .2s ease;
 }
 
 
@@ -296,7 +376,7 @@ body {
     border-color: #9da4ad;
 
     box-shadow:
-        0 0 0 4px rgba(40,45,50,0.06);
+        0 0 0 4px rgba(40,45,50,.06);
 }
 
 
@@ -337,24 +417,32 @@ body {
 }
 
 
+/* =====================================================
+   RULE CARD
+   ===================================================== */
+
 .rule-card {
     position: relative;
 
+    display: flex;
+
+    gap: 18px;
+
     padding: 22px 24px;
 
-    background: #ffffff;
+    background: #fff;
 
     border: 1px solid #e7e9ec;
 
     border-radius: 17px;
 
     box-shadow:
-        0 5px 18px rgba(20,30,40,0.035);
+        0 5px 18px rgba(20,30,40,.035);
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
 
     overflow: hidden;
 }
@@ -375,7 +463,7 @@ body {
 
     opacity: 0;
 
-    transition: opacity 0.2s ease;
+    transition: opacity .2s ease;
 }
 
 
@@ -385,7 +473,7 @@ body {
     border-color: #d8dce1;
 
     box-shadow:
-        0 12px 30px rgba(20,30,40,0.08);
+        0 12px 30px rgba(20,30,40,.08);
 }
 
 
@@ -395,71 +483,71 @@ body {
 
 
 /* =====================================================
-   RULE META
+   RULE NUMBER
    ===================================================== */
 
-.rule-meta {
+.rule-number {
+    width: 42px;
+    height: 42px;
+
     display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    margin-bottom: 13px;
-}
-
-
-.number {
-    display: inline-flex;
 
     align-items: center;
     justify-content: center;
 
-    min-width: 42px;
-    height: 27px;
+    flex-shrink: 0;
 
-    padding: 0 9px;
-
-    border-radius: 8px;
+    border-radius: 12px;
 
     background: #202329;
 
-    color: #ffffff;
+    color: #fff;
 
-    font-size: 11px;
+    font-size: 12px;
 
     font-weight: 800;
 
-    letter-spacing: 0.5px;
+    box-shadow:
+        0 5px 12px rgba(0,0,0,.12);
 }
 
 
-.badge {
+/* =====================================================
+   RULE CONTENT
+   ===================================================== */
+
+.rule-content {
+    min-width: 0;
+    flex: 1;
+}
+
+
+.rule-category {
     display: inline-flex;
 
     align-items: center;
 
-    height: 27px;
+    min-height: 25px;
 
-    padding: 0 11px;
+    padding: 0 10px;
 
-    border-radius: 8px;
+    margin-bottom: 8px;
+
+    border-radius: 7px;
 
     background: #f0f2f4;
 
     color: #606771;
 
-    font-size: 11px;
+    font-size: 10px;
 
     font-weight: 700;
+
+    letter-spacing: .3px;
 }
 
 
-/* =====================================================
-   RULE TITLE
-   ===================================================== */
-
-.rule-title {
+.rule-content h3 {
     font-size: 18px;
 
     font-weight: 800;
@@ -472,11 +560,7 @@ body {
 }
 
 
-/* =====================================================
-   RULE BODY
-   ===================================================== */
-
-.rule-body {
+.rule-content p {
     font-size: 14px;
 
     line-height: 1.8;
@@ -488,22 +572,65 @@ body {
 
 
 /* =====================================================
-   LOADING / EMPTY
+   LOADING
    ===================================================== */
 
-.loading,
-.empty {
+.loading {
     padding: 55px 20px;
 
     text-align: center;
 
     color: #9298a0;
 
-    background: #ffffff;
+    background: #fff;
 
     border: 1px solid #e7e9ec;
 
     border-radius: 17px;
+}
+
+
+/* =====================================================
+   EMPTY
+   ===================================================== */
+
+.empty-state {
+    padding: 65px 20px;
+
+    text-align: center;
+
+    background: #fff;
+
+    border: 1px solid #e7e9ec;
+
+    border-radius: 17px;
+
+    color: #9298a0;
+}
+
+
+.empty-icon {
+    font-size: 38px;
+
+    margin-bottom: 12px;
+
+    color: #a5aab1;
+}
+
+
+.empty-state h3 {
+    margin-bottom: 6px;
+
+    font-size: 18px;
+
+    color: #4d535b;
+}
+
+
+.empty-state p {
+    font-size: 13px;
+
+    color: #969ca4;
 }
 
 
@@ -548,8 +675,7 @@ body {
 
         margin-left: 220px;
 
-        padding:
-            40px 25px;
+        padding: 40px 25px;
     }
 
 }
@@ -572,7 +698,7 @@ body {
         padding: 18px;
 
         box-shadow:
-            0 5px 20px rgba(0,0,0,0.08);
+            0 5px 20px rgba(0,0,0,.08);
     }
 
 
@@ -593,13 +719,22 @@ body {
     }
 
 
+    #categoryMenu {
+        gap: 5px;
+    }
+
+
+    .category-btn {
+        padding: 11px 12px;
+    }
+
+
     .main {
         width: 100%;
 
         margin-left: 0;
 
-        padding:
-            30px 16px;
+        padding: 30px 16px;
     }
 
 
@@ -609,100 +744,31 @@ body {
 
 
     .rule-card {
+        gap: 13px;
+
         padding: 19px;
     }
 
 
-    .rule-title {
+    .rule-number {
+        width: 36px;
+        height: 36px;
+
+        border-radius: 10px;
+
+        font-size: 11px;
+    }
+
+
+    .rule-content h3 {
         font-size: 17px;
     }
 
-}
 
-/* =====================================================
-   PREMIUM HEADER
-   ===================================================== */
+    .rule-content p {
+        font-size: 13px;
 
-.header-label {
-    display: inline-flex;
+        line-height: 1.7;
+    }
 
-    align-items: center;
-
-    height: 28px;
-
-    padding: 0 11px;
-
-    margin-bottom: 12px;
-
-    border-radius: 8px;
-
-    background: #202329;
-
-    color: #ffffff;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-}
-
-
-.page-header h1 {
-    font-size: 40px;
-
-    line-height: 1.2;
-
-    letter-spacing: -1.2px;
-}
-
-
-.page-header p {
-    font-size: 15px;
-
-    margin-top: 5px;
-
-    color: #7b8189;
-}
-
-/* =====================================================
-   MENU ICON
-   ===================================================== */
-
-.menu-icon {
-    width: 28px;
-    height: 28px;
-
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    margin-right: 10px;
-
-    border-radius: 8px;
-
-    background: rgba(255,255,255,0.06);
-
-    font-size: 14px;
-
-    flex-shrink: 0;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.menu-item:hover .menu-icon {
-    background: rgba(255,255,255,0.12);
-
-    transform: scale(1.05);
-}
-
-
-.menu-item.active .menu-icon {
-    background: #202329;
-
-    color: #ffffff;
 }
