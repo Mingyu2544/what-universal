@@ -1,210 +1,492 @@
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuWjJ6vjNmise3J_MLpT5D_U-rLF-4/exec";
+const SHEET_ID =
+  "11BbYmUtEPbTzrJC6VHFP7vbdlYhjIvq7EN-xVjaFc8U";
+
+const SHEET_NAME = "Rules";
 
 let allRules = [];
 let currentCategory = "ทั้งหมด";
 
-function loadRules() {
-  const callbackName = "rulesCallback_" + Date.now();
 
-  window[callbackName] = function (data) {
+// ========================================
+// โหลดข้อมูลจาก Google Sheets
+// ========================================
 
-    allRules = Array.isArray(data) ? data : [];
+async function loadRules() {
+
+  const status =
+    document.getElementById("status");
+
+  try {
+
+    if (status) {
+      status.textContent =
+        "กำลังโหลดข้อมูล...";
+    }
+
+
+    const url =
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+
+    const response =
+      await fetch(url);
+
+
+    if (!response.ok) {
+      throw new Error(
+        "ไม่สามารถโหลด Google Sheets ได้"
+      );
+    }
+
+
+    const csv =
+      await response.text();
+
+
+    allRules =
+      parseCSV(csv);
+
 
     buildCategoryMenu();
     render();
 
-    delete window[callbackName];
-  };
 
-  const script = document.createElement("script");
+  } catch (error) {
 
-  script.src =
-    API_URL +
-    "?callback=" +
-    callbackName;
+    console.error(error);
 
-  script.onerror = function () {
-    document.getElementById("status").textContent =
-      "ไม่สามารถโหลดข้อมูลได้";
-  };
 
-  document.body.appendChild(script);
+    if (status) {
+
+      status.textContent =
+        "ไม่สามารถโหลดข้อมูลได้";
+
+    }
+
+  }
+
 }
 
 
+// ========================================
+// CSV Parser
+// ========================================
+
+function parseCSV(text) {
+
+  const rows = [];
+
+  let row = [];
+  let cell = "";
+  let insideQuotes = false;
+
+
+  for (let i = 0; i < text.length; i++) {
+
+    const char = text[i];
+    const next = text[i + 1];
+
+
+    if (char === '"' && insideQuotes && next === '"') {
+
+      cell += '"';
+
+      i++;
+
+      continue;
+    }
+
+
+    if (char === '"') {
+
+      insideQuotes =
+        !insideQuotes;
+
+      continue;
+    }
+
+
+    if (char === "," && !insideQuotes) {
+
+      row.push(cell);
+
+      cell = "";
+
+      continue;
+    }
+
+
+    if (
+      (char === "\n" || char === "\r") &&
+      !insideQuotes
+    ) {
+
+      if (
+        char === "\r" &&
+        next === "\n"
+      ) {
+        i++;
+      }
+
+
+      row.push(cell);
+
+      rows.push(row);
+
+      row = [];
+
+      cell = "";
+
+      continue;
+    }
+
+
+    cell += char;
+
+  }
+
+
+  if (cell !== "" || row.length > 0) {
+
+    row.push(cell);
+
+    rows.push(row);
+
+  }
+
+
+  if (rows.length <= 1) {
+    return [];
+  }
+
+
+  // ลบ Header
+  rows.shift();
+
+
+  return rows
+
+    .filter(function(row) {
+
+      return row.some(function(cell) {
+
+        return String(cell).trim() !== "";
+
+      });
+
+    })
+
+    .map(function(row) {
+
+      return {
+
+        id:
+          row[0] || "",
+
+        category:
+          row[1] || "",
+
+        title:
+          row[2] || "",
+
+        body:
+          row[3] || "",
+
+        order:
+          Number(row[4]) || 999999
+
+      };
+
+    })
+
+    .sort(function(a, b) {
+
+      return a.order - b.order;
+
+    });
+
+}
+
+
+// ========================================
+// สร้างเมนูหมวดหมู่
+// ========================================
+
 function buildCategoryMenu() {
 
-  const menu = document.getElementById("categoryMenu");
+  const menu =
+    document.getElementById(
+      "categoryMenu"
+    );
 
   if (!menu) return;
 
+
   const categories = [
+
     ...new Set(
+
       allRules
-        .map(rule => rule.category)
+
+        .map(function(rule) {
+
+          return rule.category;
+
+        })
+
         .filter(Boolean)
+
     )
+
   ];
+
 
   menu.innerHTML = "";
 
 
-  const allButton = document.createElement("button");
+  const allButton =
+    document.createElement("button");
 
-  allButton.className = "category-btn active";
+
+  allButton.className =
+    "category-btn active";
+
 
   allButton.innerHTML =
     `<span>▦</span> กฎทั้งหมด`;
 
-  allButton.onclick = function () {
 
-    currentCategory = "ทั้งหมด";
+  allButton.onclick =
+    function() {
 
-    setActiveCategory(this);
-
-    render();
-  };
-
-  menu.appendChild(allButton);
-
-
-  categories.forEach(function (category) {
-
-    const button =
-      document.createElement("button");
-
-    button.className = "category-btn";
-
-    button.innerHTML =
-      `<span>${getCategoryIcon(category)}</span> ${escapeHTML(category)}`;
-
-    button.onclick = function () {
-
-      currentCategory = category;
+      currentCategory =
+        "ทั้งหมด";
 
       setActiveCategory(this);
 
       render();
+
     };
 
-    menu.appendChild(button);
 
-  });
+  menu.appendChild(allButton);
+
+
+  categories.forEach(
+    function(category) {
+
+      const button =
+        document.createElement("button");
+
+
+      button.className =
+        "category-btn";
+
+
+      button.innerHTML =
+        `<span>${getCategoryIcon(category)}</span> ${escapeHTML(category)}`;
+
+
+      button.onclick =
+        function() {
+
+          currentCategory =
+            category;
+
+          setActiveCategory(this);
+
+          render();
+
+        };
+
+
+      menu.appendChild(button);
+
+    }
+  );
 
 }
 
+
+// ========================================
+// Icon หมวดหมู่
+// ========================================
 
 function getCategoryIcon(category) {
 
   const text =
     String(category).toLowerCase();
 
+
   if (
     text.includes("โรลเพลย์") ||
     text.includes("roleplay") ||
     text.includes("rp")
   ) {
+
     return "♟";
+
   }
+
 
   if (
     text.includes("อาชีพ") ||
     text.includes("job")
   ) {
+
     return "▣";
+
   }
+
 
   if (
     text.includes("รถ") ||
     text.includes("ยานพาหนะ") ||
     text.includes("vehicle")
   ) {
+
     return "▰";
+
   }
+
 
   if (
     text.includes("เซิร์ฟเวอร์") ||
     text.includes("server")
   ) {
+
     return "◈";
+
   }
 
+
   return "◆";
+
 }
 
+
+// ========================================
+// Active Category
+// ========================================
 
 function setActiveCategory(activeButton) {
 
   document
     .querySelectorAll(".category-btn")
-    .forEach(function (button) {
+    .forEach(function(button) {
 
-      button.classList.remove("active");
+      button.classList.remove(
+        "active"
+      );
 
     });
 
-  activeButton.classList.add("active");
+
+  activeButton.classList.add(
+    "active"
+  );
+
 }
 
+
+// ========================================
+// Render
+// ========================================
 
 function render() {
 
   const container =
-    document.getElementById("rulesContainer");
+    document.getElementById(
+      "rulesContainer"
+    );
+
 
   const status =
-    document.getElementById("status");
+    document.getElementById(
+      "status"
+    );
+
 
   const count =
-    document.getElementById("ruleCount");
+    document.getElementById(
+      "ruleCount"
+    );
+
 
   if (!container) return;
 
 
-  let rules = allRules.filter(function (rule) {
+  let rules =
+    allRules.filter(
+      function(rule) {
 
-    if (currentCategory === "ทั้งหมด") {
-      return true;
-    }
+        if (
+          currentCategory ===
+          "ทั้งหมด"
+        ) {
 
-    return rule.category === currentCategory;
+          return true;
 
-  });
+        }
+
+
+        return (
+          rule.category ===
+          currentCategory
+        );
+
+      }
+    );
 
 
   const searchInput =
-    document.getElementById("searchInput");
+    document.getElementById(
+      "searchInput"
+    );
+
 
   const search =
     searchInput
-      ? searchInput.value.trim().toLowerCase()
+      ? searchInput.value
+          .trim()
+          .toLowerCase()
       : "";
 
 
   if (search) {
 
-    rules = rules.filter(function (rule) {
+    rules =
+      rules.filter(
+        function(rule) {
 
-      return (
-        String(rule.title || "")
-          .toLowerCase()
-          .includes(search)
+          return (
 
-        ||
+            String(
+              rule.title || ""
+            )
+              .toLowerCase()
+              .includes(search)
 
-        String(rule.body || "")
-          .toLowerCase()
-          .includes(search)
+            ||
 
-        ||
+            String(
+              rule.body || ""
+            )
+              .toLowerCase()
+              .includes(search)
 
-        String(rule.category || "")
-          .toLowerCase()
-          .includes(search)
+            ||
+
+            String(
+              rule.category || ""
+            )
+              .toLowerCase()
+              .includes(search)
+
+          );
+
+        }
       );
-
-    });
 
   }
 
@@ -220,53 +502,73 @@ function render() {
   if (rules.length === 0) {
 
     container.innerHTML = `
+
       <div class="empty-state">
-        <div class="empty-icon">⌕</div>
 
-        <h3>ไม่พบกฎที่ค้นหา</h3>
+        <div class="empty-icon">
+          ⌕
+        </div>
 
-        <p>ลองเปลี่ยนหมวดหมู่หรือคำค้นหา</p>
+        <h3>
+          ไม่พบกฎที่ค้นหา
+        </h3>
+
+        <p>
+          ลองเปลี่ยนหมวดหมู่หรือคำค้นหา
+        </p>
+
       </div>
+
     `;
 
+
     if (status) {
+
       status.textContent = "";
+
     }
 
+
     return;
+
   }
 
 
   container.innerHTML =
-    rules.map(function (rule, index) {
 
-      return `
-        <article class="rule-card">
+    rules.map(
+      function(rule, index) {
 
-          <div class="rule-number">
-            ${index + 1}
-          </div>
+        return `
 
-          <div class="rule-content">
+          <article class="rule-card">
 
-            <div class="rule-category">
-              ${escapeHTML(rule.category)}
+            <div class="rule-number">
+              ${index + 1}
             </div>
 
-            <h3>
-              ${escapeHTML(rule.title)}
-            </h3>
+            <div class="rule-content">
 
-            <p>
-              ${escapeHTML(rule.body)}
-            </p>
+              <div class="rule-category">
+                ${escapeHTML(rule.category)}
+              </div>
 
-          </div>
+              <h3>
+                ${escapeHTML(rule.title)}
+              </h3>
 
-        </article>
-      `;
+              <p>
+                ${escapeHTML(rule.body)}
+              </p>
 
-    }).join("");
+            </div>
+
+          </article>
+
+        `;
+
+      }
+    ).join("");
 
 
   if (status) {
@@ -279,31 +581,61 @@ function render() {
 }
 
 
+// ========================================
+// ป้องกัน HTML
+// ========================================
+
 function escapeHTML(value) {
 
   return String(value || "")
 
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
+// ========================================
+// Search
+// ========================================
+
 document.addEventListener(
   "DOMContentLoaded",
-  function () {
+  function() {
 
     const searchInput =
-      document.getElementById("searchInput");
+      document.getElementById(
+        "searchInput"
+      );
+
 
     if (searchInput) {
 
       searchInput.addEventListener(
         "input",
-        function () {
+        function() {
 
           render();
 
@@ -311,6 +643,7 @@ document.addEventListener(
       );
 
     }
+
 
     loadRules();
 
