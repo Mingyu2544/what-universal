@@ -15,11 +15,11 @@
 }
 
 .admin-card {
-    background: #ffffff;
+    background: #fff;
     border: 1px solid #e5e7eb;
     border-radius: 18px;
     padding: 28px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,.05);
 }
 
 .admin-card h2 {
@@ -69,18 +69,18 @@
     border: 0;
     border-radius: 10px;
     background: #111827;
-    color: white;
+    color: #fff;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
 }
 
 .save-button:hover {
-    background: #000000;
+    background: #000;
 }
 
 .save-button:disabled {
-    opacity: 0.6;
+    opacity: .6;
     cursor: not-allowed;
 }
 
@@ -118,138 +118,145 @@
 
 <div class="app">
 
-    <aside class="sidebar">
+<aside class="sidebar">
 
-        <div class="logo">
-            <h2>WHAT<br>UNIVERSAL</h2>
-        </div>
+    <div class="logo">
+        <h2>WHAT<br>UNIVERSAL</h2>
+    </div>
 
-        <div class="menu-title">ระบบ</div>
+    <div class="menu-title">ระบบ</div>
 
-        <a href="index.html" class="category-btn">
-            <span>←</span>
-            กลับหน้ากฎ
-        </a>
+    <a href="index.html" class="category-btn">
+        <span>←</span>
+        กลับหน้ากฎ
+    </a>
 
-    </aside>
-
-
-    <main class="main">
-
-        <div class="container admin-page">
-
-            <header class="page-header">
-                <div class="header-label">ADMIN PANEL</div>
-
-                <h1>จัดการกฎเซิร์ฟเวอร์</h1>
-
-                <p>
-                    เพิ่มกฎใหม่เข้าสู่ระบบ WHAT UNIVERSAL
-                </p>
-            </header>
+</aside>
 
 
-            <a href="index.html" class="back-link">
-                ← กลับหน้ากฎเซิร์ฟเวอร์
-            </a>
+<main class="main">
+
+<div class="container admin-page">
+
+<header class="page-header">
+
+    <div class="header-label">
+        ADMIN PANEL
+    </div>
+
+    <h1>
+        จัดการกฎเซิร์ฟเวอร์
+    </h1>
+
+    <p>
+        เพิ่มกฎใหม่เข้าสู่ระบบ WHAT UNIVERSAL
+    </p>
+
+</header>
 
 
-            <div class="admin-card">
-
-                <h2>เพิ่มกฎใหม่</h2>
-
-                <p>
-                    กรอกข้อมูลด้านล่างเพื่อเพิ่มกฎลงใน Google Sheets
-                </p>
+<a href="index.html" class="back-link">
+    ← กลับหน้ากฎเซิร์ฟเวอร์
+</a>
 
 
-                <form id="adminForm">
+<div class="admin-card">
 
-                    <div class="form-group">
+<h2>
+    เพิ่มกฎใหม่
+</h2>
 
-                        <label for="category">
-                            หมวดหมู่
-                        </label>
-
-                        <input
-                            type="text"
-                            id="category"
-                            placeholder="เช่น กฎเซิร์ฟเวอร์"
-                            required
-                        >
-
-                    </div>
+<p>
+    กรอกข้อมูลด้านล่างเพื่อเพิ่มกฎลงใน Google Sheets
+</p>
 
 
-                    <div class="form-group">
+<form id="adminForm">
 
-                        <label for="title">
-                            หัวข้อ
-                        </label>
+<div class="form-group">
 
-                        <input
-                            type="text"
-                            id="title"
-                            placeholder="เช่น มารยาททางสังคม"
-                            required
-                        >
+<label for="category">
+    หมวดหมู่
+</label>
 
-                    </div>
+<input
+    type="text"
+    id="category"
+    placeholder="เช่น กฎเซิร์ฟเวอร์"
+    required
+>
 
-
-                    <div class="form-group">
-
-                        <label for="body">
-                            รายละเอียด
-                        </label>
-
-                        <textarea
-                            id="body"
-                            placeholder="กรอกรายละเอียดของกฎ..."
-                            required
-                        ></textarea>
-
-                    </div>
+</div>
 
 
-                    <div class="form-group">
+<div class="form-group">
 
-                        <label for="order">
-                            ลำดับ
-                        </label>
+<label for="title">
+    หัวข้อ
+</label>
 
-                        <input
-                            type="number"
-                            id="order"
-                            placeholder="เช่น 1"
-                            value="1"
-                            min="1"
-                        >
+<input
+    type="text"
+    id="title"
+    placeholder="เช่น มารยาททางสังคม"
+    required
+>
 
-                    </div>
-
-
-                    <button
-                        type="submit"
-                        class="save-button"
-                        id="saveButton"
-                    >
-                        บันทึกกฎ
-                    </button>
+</div>
 
 
-                    <div
-                        id="message"
-                        class="admin-message"
-                    ></div>
+<div class="form-group">
 
-                </form>
+<label for="body">
+    รายละเอียด
+</label>
 
-            </div>
+<textarea
+    id="body"
+    placeholder="กรอกรายละเอียดของกฎ..."
+    required
+></textarea>
 
-        </div>
+</div>
 
-    </main>
+
+<div class="form-group">
+
+<label for="order">
+    ลำดับ
+</label>
+
+<input
+    type="number"
+    id="order"
+    value="1"
+    min="1"
+>
+
+</div>
+
+
+<button
+    type="submit"
+    class="save-button"
+    id="saveButton"
+>
+    บันทึกกฎ
+</button>
+
+
+<div
+    id="message"
+    class="admin-message"
+></div>
+
+</form>
+
+</div>
+
+</div>
+
+</main>
 
 </div>
 
@@ -260,9 +267,14 @@ const API_URL =
     "https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuJwJ6vjNmise3J_MLpT5D_U-rLF-4/exec";
 
 
-const form = document.getElementById("adminForm");
-const message = document.getElementById("message");
-const saveButton = document.getElementById("saveButton");
+const form =
+    document.getElementById("adminForm");
+
+const message =
+    document.getElementById("message");
+
+const saveButton =
+    document.getElementById("saveButton");
 
 
 function showMessage(text, type) {
@@ -275,22 +287,36 @@ function showMessage(text, type) {
 }
 
 
+/* =========================
+   บันทึกกฎด้วย JSONP
+========================= */
+
 form.addEventListener("submit", function(event) {
 
     event.preventDefault();
 
 
     const category =
-        document.getElementById("category").value.trim();
+        document.getElementById("category")
+        .value
+        .trim();
+
 
     const title =
-        document.getElementById("title").value.trim();
+        document.getElementById("title")
+        .value
+        .trim();
+
 
     const body =
-        document.getElementById("body").value.trim();
+        document.getElementById("body")
+        .value
+        .trim();
+
 
     const order =
-        document.getElementById("order").value;
+        document.getElementById("order")
+        .value;
 
 
     if (!category || !title || !body) {
@@ -310,111 +336,94 @@ form.addEventListener("submit", function(event) {
         "กำลังบันทึก...";
 
 
-    const data = {
-
-        action: "add",
-
-        category: category,
-
-        title: title,
-
-        body: body,
-
-        order: order
-
-    };
+    const callbackName =
+        "addRuleCallback_" + Date.now();
 
 
-    const formData =
-        new URLSearchParams();
+    window[callbackName] =
+        function(result) {
 
-    formData.append(
-        "data",
-        JSON.stringify(data)
-    );
+            if (result && result.success) {
 
+                showMessage(
+                    "เพิ่มกฎสำเร็จแล้ว",
+                    "success"
+                );
 
-    fetch(API_URL, {
+                form.reset();
 
-        method: "POST",
+                document.getElementById("order")
+                    .value = "1";
 
-        headers: {
-            "Content-Type":
-                "application/x-www-form-urlencoded;charset=UTF-8"
-        },
+            } else {
 
-        body: formData.toString()
+                showMessage(
+                    result && result.message
+                        ? result.message
+                        : "บันทึกไม่สำเร็จ",
+                    "error"
+                );
 
-    })
-
-    .then(function(response) {
-
-        return response.text();
-
-    })
-
-    .then(function(result) {
-
-        console.log("API:", result);
+            }
 
 
-        let data;
+            saveButton.disabled = false;
 
-        try {
+            saveButton.textContent =
+                "บันทึกกฎ";
 
-            data = JSON.parse(result);
 
-        } catch (error) {
+            delete window[callbackName];
 
-            throw new Error(
-                "API ส่งข้อมูลกลับมาไม่ถูกต้อง"
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    const script =
+        document.createElement("script");
+
+
+    script.src =
+        API_URL +
+        "?action=add" +
+        "&category=" +
+        encodeURIComponent(category) +
+        "&title=" +
+        encodeURIComponent(title) +
+        "&body=" +
+        encodeURIComponent(body) +
+        "&order=" +
+        encodeURIComponent(order) +
+        "&callback=" +
+        callbackName;
+
+
+    script.onerror =
+        function() {
+
+            showMessage(
+                "ไม่สามารถเชื่อมต่อกับระบบได้",
+                "error"
             );
 
-        }
+
+            saveButton.disabled = false;
+
+            saveButton.textContent =
+                "บันทึกกฎ";
 
 
-        if (!data.success) {
+            delete window[callbackName];
 
-            throw new Error(
-                data.message || "บันทึกไม่สำเร็จ"
-            );
+            script.remove();
 
-        }
+        };
 
 
-        showMessage(
-            "เพิ่มกฎสำเร็จแล้ว",
-            "success"
-        );
-
-
-        form.reset();
-
-        document.getElementById("order").value = "1";
-
-    })
-
-    .catch(function(error) {
-
-        console.error(error);
-
-
-        showMessage(
-            error.message ||
-            "เกิดข้อผิดพลาดในการบันทึก",
-            "error"
-        );
-
-    })
-
-    .finally(function() {
-
-        saveButton.disabled = false;
-
-        saveButton.textContent =
-            "บันทึกกฎ";
-
-    });
+    document.body.appendChild(script);
 
 });
 
