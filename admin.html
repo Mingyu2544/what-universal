@@ -1,426 +1,241 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>WHAT UNIVERSAL — Admin</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
-    <style>
-
-        .admin-page {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .admin-card {
-            background: #ffffff;
-            border: 1px solid #e7e9ec;
-            border-radius: 18px;
-            padding: 28px;
-            box-shadow:
-                0 8px 25px rgba(20,30,40,.04);
-        }
-
-        .admin-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: #1d2126;
-            margin-bottom: 6px;
-        }
-
-        .admin-description {
-            font-size: 14px;
-            color: #7b8189;
-            margin-bottom: 25px;
-        }
-
-        .admin-form {
-            display: grid;
-            gap: 16px;
-        }
-
-        .form-group {
-            display: grid;
-            gap: 7px;
-        }
-
-        .form-group label {
-            font-size: 13px;
-            font-weight: 700;
-            color: #454b53;
-        }
-
-        .form-group input,
-        .form-group textarea {
-
-            width: 100%;
-
-            border: 1px solid #dfe3e7;
-
-            border-radius: 11px;
-
-            padding: 12px 14px;
-
-            font-family: inherit;
-
-            font-size: 14px;
-
-            outline: none;
-
-            background: #ffffff;
-
-            color: #20242a;
-
-            transition:
-                border .2s ease,
-                box-shadow .2s ease;
-        }
-
-        .form-group textarea {
-            min-height: 130px;
-            resize: vertical;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-
-            border-color: #9da4ad;
-
-            box-shadow:
-                0 0 0 4px rgba(40,45,50,.06);
-        }
-
-        .admin-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 5px;
-        }
-
-        .admin-button {
-
-            border: none;
-
-            border-radius: 11px;
-
-            padding: 12px 20px;
-
-            font-family: inherit;
-
-            font-size: 14px;
-
-            font-weight: 700;
-
-            cursor: pointer;
-
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease;
-        }
-
-        .admin-button:hover {
-            transform: translateY(-2px);
-        }
-
-        .admin-button.primary {
-
-            background: #202329;
-
-            color: #ffffff;
-
-            box-shadow:
-                0 7px 18px rgba(0,0,0,.12);
-        }
-
-        .admin-button.secondary {
-
-            background: #f0f2f4;
-
-            color: #555b63;
-        }
-
-        .admin-button:disabled {
-            opacity: .55;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .admin-message {
-
-            display: none;
-
-            margin-top: 18px;
-
-            padding: 13px 15px;
-
-            border-radius: 11px;
-
-            font-size: 13px;
-
-            font-weight: 600;
-        }
-
-        .admin-message.success {
-
-            display: block;
-
-            background: #eef8f1;
-
-            color: #287a43;
-
-            border: 1px solid #ccebd5;
-        }
-
-        .admin-message.error {
-
-            display: block;
-
-            background: #fff1f1;
-
-            color: #a33a3a;
-
-            border: 1px solid #f0cccc;
-        }
-
-        .admin-back {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 7px;
-
-            margin-bottom: 20px;
-
-            color: #666c74;
-
-            font-size: 13px;
-
-            font-weight: 700;
-
-            text-decoration: none;
-        }
-
-        .admin-back:hover {
-            color: #17191d;
-        }
-
-        @media (max-width: 650px) {
-
-            .admin-card {
-                padding: 20px;
-            }
-
-            .admin-actions {
-                flex-direction: column;
-            }
-
-            .admin-button {
-                width: 100%;
-            }
-
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WHAT UNIVERSAL — Admin</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+.admin-page {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.admin-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.admin-card h2 {
+    margin: 0 0 8px;
+}
+
+.admin-card > p {
+    margin: 0 0 25px;
+    color: #6b7280;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #111827;
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.save-button {
+    width: 100%;
+    padding: 14px;
+    border: 0;
+    border-radius: 10px;
+    background: #111827;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background: #000000;
+}
+
+.save-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.admin-message {
+    margin-top: 15px;
+    padding: 12px 15px;
+    border-radius: 10px;
+    display: none;
+}
+
+.admin-message.success {
+    display: block;
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.admin-message.error {
+    display: block;
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #111827;
+    text-decoration: none;
+    font-weight: 700;
+}
+</style>
 
 </head>
 
-
 <body>
 
-
 <div class="app">
-
-
-    <!-- SIDEBAR -->
 
     <aside class="sidebar">
 
         <div class="logo">
-
-            <h2>
-                WHAT<br>
-                UNIVERSAL
-            </h2>
-
+            <h2>WHAT<br>UNIVERSAL</h2>
         </div>
 
+        <div class="menu-title">ระบบ</div>
 
-        <div class="menu-title">
-            ระบบ
-        </div>
-
-
-        <a
-            href="index.html"
-            class="category-btn"
-        >
-
+        <a href="index.html" class="category-btn">
             <span>←</span>
-
             กลับหน้ากฎ
-
         </a>
-
-
-        <div class="menu-title">
-            Admin
-        </div>
-
-
-        <div class="category-btn active">
-
-            <span>⚙</span>
-
-            จัดการกฎ
-
-        </div>
 
     </aside>
 
 
-
-    <!-- MAIN -->
-
     <main class="main">
 
-        <div class="container">
+        <div class="container admin-page">
 
-            <div class="admin-page">
+            <header class="page-header">
+                <div class="header-label">ADMIN PANEL</div>
+
+                <h1>จัดการกฎเซิร์ฟเวอร์</h1>
+
+                <p>
+                    เพิ่มกฎใหม่เข้าสู่ระบบ WHAT UNIVERSAL
+                </p>
+            </header>
 
 
-                <header class="page-header">
+            <a href="index.html" class="back-link">
+                ← กลับหน้ากฎเซิร์ฟเวอร์
+            </a>
 
-                    <div class="header-label">
-                        ADMIN PANEL
+
+            <div class="admin-card">
+
+                <h2>เพิ่มกฎใหม่</h2>
+
+                <p>
+                    กรอกข้อมูลด้านล่างเพื่อเพิ่มกฎลงใน Google Sheets
+                </p>
+
+
+                <form id="adminForm">
+
+                    <div class="form-group">
+
+                        <label for="category">
+                            หมวดหมู่
+                        </label>
+
+                        <input
+                            type="text"
+                            id="category"
+                            placeholder="เช่น กฎเซิร์ฟเวอร์"
+                            required
+                        >
+
                     </div>
 
-                    <h1>
-                        จัดการกฎ
-                    </h1>
 
-                    <p>
-                        เพิ่มกฎใหม่เข้าสู่ระบบ
-                    </p>
+                    <div class="form-group">
 
-                </header>
+                        <label for="title">
+                            หัวข้อ
+                        </label>
 
+                        <input
+                            type="text"
+                            id="title"
+                            placeholder="เช่น มารยาททางสังคม"
+                            required
+                        >
 
-
-                <div class="admin-card">
-
-
-                    <div class="admin-title">
-                        เพิ่มกฎใหม่
                     </div>
 
 
-                    <div class="admin-description">
-                        ข้อมูลที่บันทึกจะถูกเพิ่มลงใน Google Sheets
+                    <div class="form-group">
+
+                        <label for="body">
+                            รายละเอียด
+                        </label>
+
+                        <textarea
+                            id="body"
+                            placeholder="กรอกรายละเอียดของกฎ..."
+                            required
+                        ></textarea>
+
                     </div>
 
 
-                    <form
-                        id="adminForm"
-                        class="admin-form"
+                    <div class="form-group">
+
+                        <label for="order">
+                            ลำดับ
+                        </label>
+
+                        <input
+                            type="number"
+                            id="order"
+                            placeholder="เช่น 1"
+                            value="1"
+                            min="1"
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="save-button"
+                        id="saveButton"
                     >
-
-
-                        <div class="form-group">
-
-                            <label>
-                                หมวดหมู่
-                            </label>
-
-                            <input
-                                id="category"
-                                type="text"
-                                placeholder="เช่น กฎเซิร์ฟเวอร์"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                หัวข้อ
-                            </label>
-
-                            <input
-                                id="title"
-                                type="text"
-                                placeholder="ชื่อหัวข้อกฎ"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                รายละเอียด
-                            </label>
-
-                            <textarea
-                                id="body"
-                                placeholder="รายละเอียดของกฎ"
-                                required
-                            ></textarea>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                ลำดับ
-                            </label>
-
-                            <input
-                                id="order"
-                                type="number"
-                                placeholder="เช่น 4"
-                            >
-
-                        </div>
-
-
-                        <div class="admin-actions">
-
-                            <button
-                                id="saveButton"
-                                type="submit"
-                                class="admin-button primary"
-                            >
-                                บันทึกกฎ
-                            </button>
-
-
-                            <button
-                                type="reset"
-                                class="admin-button secondary"
-                            >
-                                ล้างข้อมูล
-                            </button>
-
-                        </div>
-
-
-                    </form>
+                        บันทึกกฎ
+                    </button>
 
 
                     <div
@@ -428,9 +243,7 @@
                         class="admin-message"
                     ></div>
 
-
-                </div>
-
+                </form>
 
             </div>
 
@@ -438,9 +251,7 @@
 
     </main>
 
-
 </div>
-
 
 
 <script>
@@ -449,14 +260,9 @@ const API_URL =
     "https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuJwJ6vjNmise3J_MLpT5D_U-rLF-4/exec";
 
 
-const form =
-    document.getElementById("adminForm");
-
-const message =
-    document.getElementById("message");
-
-const saveButton =
-    document.getElementById("saveButton");
+const form = document.getElementById("adminForm");
+const message = document.getElementById("message");
+const saveButton = document.getElementById("saveButton");
 
 
 function showMessage(text, type) {
@@ -469,7 +275,7 @@ function showMessage(text, type) {
 }
 
 
-form.addEventListener("submit", async function(event) {
+form.addEventListener("submit", function(event) {
 
     event.preventDefault();
 
@@ -495,7 +301,6 @@ form.addEventListener("submit", async function(event) {
         );
 
         return;
-
     }
 
 
@@ -520,55 +325,100 @@ form.addEventListener("submit", async function(event) {
     };
 
 
-    try {
+    const formData =
+        new URLSearchParams();
 
-        await fetch(API_URL, {
+    formData.append(
+        "data",
+        JSON.stringify(data)
+    );
 
-            method: "POST",
 
-            mode: "no-cors",
+    fetch(API_URL, {
 
-            headers: {
+        method: "POST",
 
-                "Content-Type":
-                    "text/plain;charset=utf-8"
+        headers: {
+            "Content-Type":
+                "application/x-www-form-urlencoded;charset=UTF-8"
+        },
 
-            },
+        body: formData.toString()
 
-            body: JSON.stringify(data)
+    })
 
-        });
+    .then(function(response) {
+
+        return response.text();
+
+    })
+
+    .then(function(result) {
+
+        console.log("API:", result);
+
+
+        let data;
+
+        try {
+
+            data = JSON.parse(result);
+
+        } catch (error) {
+
+            throw new Error(
+                "API ส่งข้อมูลกลับมาไม่ถูกต้อง"
+            );
+
+        }
+
+
+        if (!data.success) {
+
+            throw new Error(
+                data.message || "บันทึกไม่สำเร็จ"
+            );
+
+        }
 
 
         showMessage(
-            "ส่งคำขอบันทึกแล้ว กรุณาตรวจสอบ Google Sheets",
+            "เพิ่มกฎสำเร็จแล้ว",
             "success"
         );
 
 
         form.reset();
 
+        document.getElementById("order").value = "1";
 
-    } catch (error) {
+    })
+
+    .catch(function(error) {
+
+        console.error(error);
+
 
         showMessage(
-            "เกิดข้อผิดพลาดในการส่งข้อมูล",
+            error.message ||
+            "เกิดข้อผิดพลาดในการบันทึก",
             "error"
         );
 
-    }
+    })
 
+    .finally(function() {
 
-    saveButton.disabled = false;
+        saveButton.disabled = false;
 
-    saveButton.textContent =
-        "บันทึกกฎ";
+        saveButton.textContent =
+            "บันทึกกฎ";
+
+    });
 
 });
 
 </script>
 
-
 </body>
-
 </html>
