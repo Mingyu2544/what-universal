@@ -1,13 +1,10 @@
-const API_URL = 'https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuJw6JvjNmise3J_MLpT5D_U-rLF-4/exec';
+const API_URL =
+  'https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuJw6JvjNmise3J_MLpT5D_U-rLF-4/exec';
 
 let allRules = [];
 let selectedCategory = 'all';
 
-document.addEventListener('DOMContentLoaded', () => {
-
-    document
-        .getElementById('searchInput')
-        .addEventListener('input', render);
+document.addEventListener('DOMContentLoaded', function () {
 
     loadRules();
 
@@ -17,24 +14,25 @@ document.addEventListener('DOMContentLoaded', () => {
 function loadRules() {
 
     const callbackName =
-        'whatUniversalRules_' + Date.now();
+        'loadRules_' + Date.now();
 
-    window[callbackName] = function(data) {
+    window[callbackName] = function (data) {
 
-        allRules = Array.isArray(data)
-            ? data
-            : [];
+        console.log('API DATA:', data);
+
+        allRules = data;
 
         buildCategoryMenu();
+
         render();
 
         delete window[callbackName];
 
-        const oldScript =
+        const script =
             document.getElementById('api-script');
 
-        if (oldScript) {
-            oldScript.remove();
+        if (script) {
+            script.remove();
         }
 
     };
@@ -48,15 +46,19 @@ function loadRules() {
     script.src =
         API_URL +
         '?callback=' +
-        encodeURIComponent(callbackName);
+        callbackName;
 
-    script.onerror = function() {
+    script.onerror = function () {
 
         document.getElementById('ruleCount').textContent =
-            'เกิดข้อผิดพลาด';
+            'เชื่อมต่อ API ไม่สำเร็จ';
 
         document.getElementById('rulesContainer').innerHTML =
-            '<div class="empty">ไม่สามารถเชื่อมต่อ Google Apps Script ได้</div>';
+            `
+            <div class="empty">
+                ไม่สามารถโหลดข้อมูลจาก Google Sheets ได้
+            </div>
+            `;
 
         delete window[callbackName];
 
@@ -78,19 +80,23 @@ function buildCategoryMenu() {
     const categories =
         [...new Set(
             allRules
-                .map(rule => rule.category)
+                .map(function (rule) {
+                    return rule.category;
+                })
                 .filter(Boolean)
         )];
 
 
     menu.innerHTML = `
-        <button class="menu-item active" data-category="all">
+        <button
+            class="menu-item active"
+            data-category="all">
             กฎทั้งหมด
         </button>
     `;
 
 
-    categories.forEach(category => {
+    categories.forEach(function (category) {
 
         const button =
             document.createElement('button');
@@ -101,7 +107,7 @@ function buildCategoryMenu() {
 
         button.dataset.category = category;
 
-        button.addEventListener('click', () => {
+        button.addEventListener('click', function () {
 
             selectedCategory = category;
 
@@ -121,7 +127,8 @@ function buildCategoryMenu() {
             '[data-category="all"]'
         );
 
-    allButton.addEventListener('click', () => {
+
+    allButton.addEventListener('click', function () {
 
         selectedCategory = 'all';
 
@@ -138,7 +145,7 @@ function setActive(button) {
 
     document
         .querySelectorAll('.menu-item')
-        .forEach(item => {
+        .forEach(function (item) {
 
             item.classList.remove('active');
 
@@ -155,13 +162,15 @@ function render() {
         document.getElementById('searchInput');
 
     const query =
-        searchInput.value
-            .trim()
-            .toLowerCase();
+        searchInput
+            ? searchInput.value
+                .trim()
+                .toLowerCase()
+            : '';
 
 
     const filtered =
-        allRules.filter(rule => {
+        allRules.filter(function (rule) {
 
             const categoryMatch =
                 selectedCategory === 'all' ||
@@ -170,9 +179,15 @@ function render() {
 
             const searchMatch =
                 !query ||
-                `${rule.category} ${rule.title} ${rule.body}`
-                    .toLowerCase()
-                    .includes(query);
+                (
+                    rule.category +
+                    ' ' +
+                    rule.title +
+                    ' ' +
+                    rule.body
+                )
+                .toLowerCase()
+                .includes(query);
 
 
             return categoryMatch && searchMatch;
@@ -181,41 +196,41 @@ function render() {
 
 
     document.getElementById('ruleCount').textContent =
-        `${filtered.length} ข้อ`;
+        filtered.length + ' ข้อ';
 
 
     document.getElementById('rulesContainer').innerHTML =
         filtered.length
 
-            ? filtered.map(rule => `
+            ? filtered.map(function (rule) {
 
-                <article class="rule-card">
+                return `
+                    <article class="rule-card">
 
-                    <div class="rule-meta">
+                        <div class="rule-meta">
 
-                        <span class="number">
-                            #${escapeHTML(rule.id)}
-                        </span>
+                            <span class="number">
+                                #${escapeHTML(rule.id)}
+                            </span>
 
-                        <span class="badge">
-                            ${escapeHTML(rule.category)}
-                        </span>
+                            <span class="badge">
+                                ${escapeHTML(rule.category)}
+                            </span>
 
-                    </div>
+                        </div>
 
+                        <div class="rule-title">
+                            ${escapeHTML(rule.title)}
+                        </div>
 
-                    <div class="rule-title">
-                        ${escapeHTML(rule.title)}
-                    </div>
+                        <div class="rule-body">
+                            ${escapeHTML(rule.body)}
+                        </div>
 
+                    </article>
+                `;
 
-                    <div class="rule-body">
-                        ${escapeHTML(rule.body)}
-                    </div>
-
-                </article>
-
-            `).join('')
+            }).join('')
 
             : `
                 <div class="empty">
