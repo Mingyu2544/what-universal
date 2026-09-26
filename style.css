@@ -1,0 +1,238 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f6f8;
+    color: #222;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+/* =========================
+   Layout
+========================= */
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =========================
+   Sidebar
+========================= */
+
+.sidebar {
+    width: 250px;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    padding: 25px 18px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    width: 150px;
+    max-width: 100%;
+}
+
+.menu-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #999;
+    margin: 20px 10px 10px;
+    text-transform: uppercase;
+}
+
+.menu-item {
+    display: block;
+    padding: 12px 14px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    color: #555;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menu-item:hover {
+    background: #f1f2f4;
+    color: #111;
+}
+
+.menu-item.active {
+    background: #111;
+    color: #fff;
+}
+
+/* =========================
+   Main
+========================= */
+
+.main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 40px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* =========================
+   Header
+========================= */
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: #777;
+}
+
+/* =========================
+   Search
+========================= */
+
+.search-box {
+    margin-bottom: 25px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 15px 18px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    outline: none;
+    font-size: 15px;
+    background: #fff;
+}
+
+.search-box input:focus {
+    border-color: #111;
+}
+
+/* =========================
+   Rules
+========================= */
+
+.rules {
+    display: grid;
+    gap: 15px;
+}
+
+.rule-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 22px;
+    transition: 0.2s;
+}
+
+.rule-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.rule-number {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 8px;
+}
+
+.rule-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.rule-body {
+    color: #666;
+    line-height: 1.7;
+    white-space: pre-line;
+}
+
+.category-badge {
+    display: inline-block;
+    background: #f1f2f4;
+    color: #555;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+/* =========================
+   Loading
+========================= */
+
+.loading {
+    text-align: center;
+    padding: 50px;
+    color: #888;
+}
+
+/* =========================
+   Empty
+========================= */
+
+.empty {
+    text-align: center;
+    padding: 50px;
+    color: #999;
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .app {
+        display: block;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+        padding: 25px 18px;
+    }
+
+    .logo img {
+        width: 130px;
+    }
+
+}
