@@ -938,3 +938,7 @@ body {
     }
 
 }
+
+.category-btn span {
+    display: none !important;
+}
