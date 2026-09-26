@@ -1515,4 +1515,44 @@ body {
         padding: 14px;
     }
 
+   .loading {
+    padding: 60px 20px;
+
+    text-align: center;
+
+    color: #9298a1;
+
+    font-size: 13px;
+}
+
+.loading::before {
+    content: "";
+
+    display: block;
+
+    width: 22px;
+    height: 22px;
+
+    margin: 0 auto 14px;
+
+    border: 2px solid #e5e7ea;
+    border-top-color: #777d87;
+
+    border-radius: 50%;
+
+    animation: loadingSpin 0.8s linear infinite;
+}
+
+@keyframes loadingSpin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
 }
