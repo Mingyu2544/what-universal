@@ -705,5 +705,14 @@ input {
     .home-grid {
         grid-template-columns: 1fr;
     }
+
+   #categoryMenu {
+    padding-left: 45px;
+    padding-right: 0;
+}
+
+#categoryMenu .category-btn {
+    width: calc(100% - 45px);
+}
 }
 ```
