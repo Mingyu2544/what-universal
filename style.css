@@ -72,30 +72,23 @@ body {
    LOGO
    ===================================================== */
 
+/* LOGO */
 .logo {
-    padding: 20px 18px;
+    padding: 10px 0;
     margin-bottom: 24px;
-
-    background: rgba(255, 255, 255, 0.035);
-
-    border: 1px solid rgba(255, 255, 255, 0.06);
-
-    border-radius: 12px;
-
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
     text-align: center;
 }
 
-.logo h2 {
-    margin: 0;
-
-    color: #ffffff;
-
-    font-size: 25px;
-    line-height: 0.95;
-
-    font-weight: 900;
-
-    letter-spacing: 2px;
+.logo img {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
 }
 
 
