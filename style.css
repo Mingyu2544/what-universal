@@ -1,6 +1,6 @@
 /* =====================================================
    WHAT UNIVERSAL
-   Main Website Style
+   RUN TOWN INSPIRED UI
    ===================================================== */
 
 * {
@@ -20,7 +20,7 @@ body {
         Tahoma,
         sans-serif;
 
-    background: #f4f6f9;
+    background: #f5f6f8;
     color: #20242a;
 }
 
@@ -49,17 +49,19 @@ body {
 
     padding: 28px 18px;
 
-    background: rgba(25, 27, 32, 0.92);
-
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+        linear-gradient(
+            180deg,
+            #17191d 0%,
+            #1d2025 100%
+        );
 
     color: #fff;
 
+    border-right: 1px solid rgba(255,255,255,.06);
+
     box-shadow:
-        8px 0 30px rgba(0, 0, 0, 0.18);
+        10px 0 35px rgba(0,0,0,.10);
 
     z-index: 100;
 }
@@ -78,43 +80,32 @@ body {
 
     margin-bottom: 28px;
 
-    border-radius: 18px;
+    border-radius: 16px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,0.08),
-            rgba(255,255,255,0.02)
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.025)
         );
 
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.04);
 }
 
 .logo h2 {
     font-size: 25px;
     line-height: .95;
+
     letter-spacing: 2px;
+
     text-align: center;
+
     font-weight: 900;
-}
 
-
-/* =====================================================
-   MENU TITLE
-   ===================================================== */
-
-.menu-title {
-    margin: 24px 12px 10px;
-
-    font-size: 11px;
-
-    color: #8e949d;
-
-    text-transform: uppercase;
-
-    letter-spacing: 1.5px;
-
-    font-weight: 700;
+    color: #fff;
 }
 
 
@@ -125,11 +116,35 @@ body {
 #categoryMenu {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
 }
 
 
-/* ปุ่มหมวดหมู่ */
+/* =====================================================
+   MENU TITLE
+   ===================================================== */
+
+#categoryMenu .menu-title {
+    display: block;
+    width: 100%;
+
+    margin: 20px 12px 7px;
+
+    color: #777d87;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.8px;
+}
+
+
+/* =====================================================
+   CATEGORY BUTTON
+   ===================================================== */
 
 .category-btn {
     width: 100%;
@@ -140,14 +155,17 @@ body {
     padding: 12px 13px;
 
     border: none;
-    border-radius: 12px;
+
+    border-radius: 11px;
 
     background: transparent;
 
-    color: #b8bdc5;
+    color: #aeb4bd;
 
     font-family: inherit;
+
     font-size: 14px;
+
     font-weight: 600;
 
     text-align: left;
@@ -162,65 +180,53 @@ body {
 
 
 .category-btn:hover {
-    background: rgba(255,255,255,.07);
+    background: rgba(255,255,255,.055);
 
     color: #fff;
 
-    transform: translateX(3px);
+    transform: translateX(2px);
 }
 
 
 .category-btn.active {
-    background:
-        linear-gradient(
-            135deg,
-            #fff,
-            #e9edf2
-        );
+    background: #fff;
 
     color: #17191d;
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,.18);
+        0 8px 22px rgba(0,0,0,.18);
 }
 
 
 .category-btn span {
-    width: 28px;
-    height: 28px;
+    width: 25px;
+    height: 25px;
 
     display: inline-flex;
 
     align-items: center;
     justify-content: center;
 
-    margin-right: 10px;
+    margin-right: 9px;
 
-    border-radius: 8px;
-
-    background: rgba(255,255,255,.06);
-
-    font-size: 14px;
+    font-size: 9px;
 
     flex-shrink: 0;
 
+    color: currentColor;
+
     transition:
-        background .2s ease,
         transform .2s ease;
 }
 
 
 .category-btn:hover span {
-    background: rgba(255,255,255,.12);
-
-    transform: scale(1.05);
+    transform: scale(1.15);
 }
 
 
 .category-btn.active span {
-    background: #202329;
-
-    color: #fff;
+    color: #17191d;
 }
 
 
@@ -235,7 +241,7 @@ body {
 
     min-height: 100vh;
 
-    padding: 55px 45px;
+    padding: 50px 45px;
 }
 
 
@@ -249,11 +255,11 @@ body {
 
 
 /* =====================================================
-   HEADER
+   PAGE HEADER
    ===================================================== */
 
 .page-header {
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
 
@@ -262,47 +268,47 @@ body {
 
     align-items: center;
 
-    height: 28px;
+    height: 26px;
 
-    padding: 0 11px;
+    padding: 0 10px;
 
-    margin-bottom: 12px;
+    margin-bottom: 13px;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
     background: #202329;
 
     color: #fff;
 
-    font-size: 10px;
+    font-size: 9px;
 
     font-weight: 800;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 1.6px;
 }
 
 
 .page-header h1 {
     font-size: 40px;
 
-    line-height: 1.2;
+    line-height: 1.15;
 
     font-weight: 900;
 
-    letter-spacing: -1.2px;
+    letter-spacing: -1.3px;
 
     color: #17191d;
 
-    margin-bottom: 8px;
+    margin-bottom: 9px;
 }
 
 
 .page-header p {
-    font-size: 15px;
+    font-size: 14px;
 
-    margin-top: 5px;
+    color: #858b94;
 
-    color: #7b8189;
+    line-height: 1.7;
 }
 
 
@@ -327,7 +333,7 @@ body {
 
     transform: translateY(-52%);
 
-    font-size: 24px;
+    font-size: 23px;
 
     color: #9aa0a8;
 
@@ -340,13 +346,13 @@ body {
 .search-box input {
     width: 100%;
 
-    height: 56px;
+    height: 54px;
 
-    padding: 0 20px 0 52px;
+    padding: 0 20px 0 51px;
 
-    border-radius: 15px;
+    border-radius: 13px;
 
-    border: 1px solid #e1e4e8;
+    border: 1px solid #e2e5e8;
 
     background: #fff;
 
@@ -359,7 +365,7 @@ body {
     outline: none;
 
     box-shadow:
-        0 5px 20px rgba(20,30,40,.04);
+        0 5px 20px rgba(20,30,40,.035);
 
     transition:
         border .2s ease,
@@ -373,10 +379,10 @@ body {
 
 
 .search-box input:focus {
-    border-color: #9da4ad;
+    border-color: #b7bcc3;
 
     box-shadow:
-        0 0 0 4px rgba(40,45,50,.06);
+        0 0 0 4px rgba(40,45,50,.045);
 }
 
 
@@ -385,20 +391,20 @@ body {
    ===================================================== */
 
 .status {
-    font-size: 13px;
+    font-size: 12px;
 
     color: #8a9098;
 
-    margin-bottom: 8px;
+    margin-bottom: 7px;
 }
 
 
 .rule-count {
-    font-size: 13px;
+    font-size: 12px;
 
-    color: #8a9098;
+    color: #858b94;
 
-    margin-bottom: 18px;
+    margin-bottom: 17px;
 
     font-weight: 600;
 }
@@ -413,7 +419,7 @@ body {
 
     flex-direction: column;
 
-    gap: 14px;
+    gap: 12px;
 }
 
 
@@ -426,15 +432,15 @@ body {
 
     display: flex;
 
-    gap: 18px;
+    gap: 17px;
 
-    padding: 22px 24px;
+    padding: 21px 22px;
 
     background: #fff;
 
-    border: 1px solid #e7e9ec;
+    border: 1px solid #e8eaed;
 
-    border-radius: 17px;
+    border-radius: 15px;
 
     box-shadow:
         0 5px 18px rgba(20,30,40,.035);
@@ -448,6 +454,16 @@ body {
 }
 
 
+.rule-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #d9dde2;
+
+    box-shadow:
+        0 12px 30px rgba(20,30,40,.075);
+}
+
+
 .rule-card::before {
     content: "";
 
@@ -456,7 +472,7 @@ body {
     left: 0;
     top: 0;
 
-    width: 4px;
+    width: 3px;
     height: 100%;
 
     background: #202329;
@@ -464,16 +480,6 @@ body {
     opacity: 0;
 
     transition: opacity .2s ease;
-}
-
-
-.rule-card:hover {
-    transform: translateY(-3px);
-
-    border-color: #d8dce1;
-
-    box-shadow:
-        0 12px 30px rgba(20,30,40,.08);
 }
 
 
@@ -487,8 +493,8 @@ body {
    ===================================================== */
 
 .rule-number {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
 
     display: flex;
 
@@ -497,18 +503,15 @@ body {
 
     flex-shrink: 0;
 
-    border-radius: 12px;
+    border-radius: 10px;
 
     background: #202329;
 
     color: #fff;
 
-    font-size: 12px;
+    font-size: 11px;
 
     font-weight: 800;
-
-    box-shadow:
-        0 5px 12px rgba(0,0,0,.12);
 }
 
 
@@ -518,6 +521,7 @@ body {
 
 .rule-content {
     min-width: 0;
+
     flex: 1;
 }
 
@@ -527,19 +531,19 @@ body {
 
     align-items: center;
 
-    min-height: 25px;
+    min-height: 24px;
 
-    padding: 0 10px;
+    padding: 0 9px;
 
-    margin-bottom: 8px;
+    margin-bottom: 7px;
 
-    border-radius: 7px;
+    border-radius: 6px;
 
     background: #f0f2f4;
 
-    color: #606771;
+    color: #626871;
 
-    font-size: 10px;
+    font-size: 9px;
 
     font-weight: 700;
 
@@ -548,7 +552,7 @@ body {
 
 
 .rule-content h3 {
-    font-size: 18px;
+    font-size: 17px;
 
     font-weight: 800;
 
@@ -556,18 +560,141 @@ body {
 
     color: #1d2126;
 
-    margin-bottom: 8px;
+    margin-bottom: 7px;
 }
 
 
 .rule-content p {
-    font-size: 14px;
+    font-size: 13px;
 
     line-height: 1.8;
 
     color: #666c74;
 
     white-space: pre-line;
+}
+
+
+/* =====================================================
+   HOME PAGE
+   ===================================================== */
+
+.home-page {
+    width: 100%;
+}
+
+
+.home-label {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 7px 10px;
+
+    margin-bottom: 14px;
+
+    border-radius: 7px;
+
+    background: #202329;
+
+    color: #fff;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.home-page h2 {
+    font-size: 36px;
+
+    line-height: 1.2;
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
+
+    color: #17191d;
+
+    margin-bottom: 10px;
+}
+
+
+.home-page > p {
+    font-size: 14px;
+
+    color: #858b94;
+
+    line-height: 1.8;
+
+    margin-bottom: 30px;
+}
+
+
+/* =====================================================
+   HOME CARDS
+   ===================================================== */
+
+.home-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+}
+
+
+.home-card {
+    padding: 24px;
+
+    min-height: 145px;
+
+    background: #fff;
+
+    border: 1px solid #e7e9ec;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 18px rgba(20,30,40,.035);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+
+.home-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #d8dce1;
+
+    box-shadow:
+        0 12px 30px rgba(20,30,40,.08);
+}
+
+
+.home-card-title {
+    margin-bottom: 10px;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    color: #1d2126;
+}
+
+
+.home-card-text {
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    color: #777d85;
 }
 
 
@@ -586,7 +713,7 @@ body {
 
     border: 1px solid #e7e9ec;
 
-    border-radius: 17px;
+    border-radius: 15px;
 }
 
 
@@ -603,7 +730,7 @@ body {
 
     border: 1px solid #e7e9ec;
 
-    border-radius: 17px;
+    border-radius: 15px;
 
     color: #9298a0;
 }
@@ -644,7 +771,7 @@ body {
 
 
 ::-webkit-scrollbar-track {
-    background: #f4f6f9;
+    background: #f5f6f8;
 }
 
 
@@ -670,12 +797,19 @@ body {
         width: 220px;
     }
 
+
     .main {
         width: calc(100% - 220px);
 
         margin-left: 220px;
 
         padding: 40px 25px;
+    }
+
+
+    .home-grid {
+        grid-template-columns:
+            1fr;
     }
 
 }
@@ -714,7 +848,7 @@ body {
     }
 
 
-    .menu-title {
+    #categoryMenu .menu-title {
         margin-top: 15px;
     }
 
@@ -743,6 +877,16 @@ body {
     }
 
 
+    .home-page h2 {
+        font-size: 28px;
+    }
+
+
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+
+
     .rule-card {
         gap: 13px;
 
@@ -754,9 +898,9 @@ body {
         width: 36px;
         height: 36px;
 
-        border-radius: 10px;
+        border-radius: 9px;
 
-        font-size: 11px;
+        font-size: 10px;
     }
 
 
@@ -770,24 +914,5 @@ body {
 
         line-height: 1.7;
     }
-
-   /* ========================================
-   SIDEBAR MENU TITLE
-   ======================================== */
-
-#categoryMenu .menu-title {
-    display: block;
-    width: 100%;
-
-    margin: 18px 12px 6px;
-
-    color: #8e949d;
-
-    font-size: 11px;
-    font-weight: 700;
-
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-}
 
 }
