@@ -921,3 +921,12 @@ body {
         padding: 14px;
     }
 }
+
+/* LOGO IMAGE */
+.logo img {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+}
