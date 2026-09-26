@@ -312,56 +312,8 @@ function buildCategoryMenu() {
 // Icon หมวดหมู่
 // ========================================
 
-function getCategoryIcon(category) {
-
-  const text =
-    String(category).toLowerCase();
-
-
-  if (
-    text.includes("โรลเพลย์") ||
-    text.includes("roleplay") ||
-    text.includes("rp")
-  ) {
-
-    return "♟";
-
-  }
-
-
-  if (
-    text.includes("อาชีพ") ||
-    text.includes("job")
-  ) {
-
-    return "▣";
-
-  }
-
-
-  if (
-    text.includes("รถ") ||
-    text.includes("ยานพาหนะ") ||
-    text.includes("vehicle")
-  ) {
-
-    return "▰";
-
-  }
-
-
-  if (
-    text.includes("เซิร์ฟเวอร์") ||
-    text.includes("server")
-  ) {
-
-    return "◈";
-
-  }
-
-
-  return "◆";
-
+function getCategoryIcon() {
+  return "●";
 }
 
 
