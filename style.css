@@ -1287,3 +1287,232 @@ body {
     letter-spacing: 1.5px;
     text-transform: uppercase;
 }
+
+/* ========================================
+   RESPONSIVE — TABLET
+======================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main {
+        margin-left: 220px;
+    }
+
+    .container {
+        padding: 36px 28px;
+    }
+
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ========================================
+   RESPONSIVE — MOBILE
+======================================== */
+
+@media (max-width: 650px) {
+
+    /* Sidebar */
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+        height: auto;
+
+        padding: 16px;
+
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+        box-shadow: none;
+    }
+
+
+    /* Logo */
+
+    .logo {
+        margin-bottom: 14px;
+        padding: 16px;
+    }
+
+    .logo h2 {
+        font-size: 18px;
+    }
+
+
+    /* Menu */
+
+    #categoryMenu {
+        display: flex;
+
+        flex-direction: row;
+
+        gap: 6px;
+
+        overflow-x: auto;
+
+        padding-bottom: 4px;
+    }
+
+    .category-btn {
+        width: auto;
+
+        min-width: max-content;
+
+        margin-bottom: 0;
+
+        padding: 9px 13px;
+
+        white-space: nowrap;
+    }
+
+
+    /* Category title */
+
+    #categoryMenu .menu-title {
+        display: none;
+    }
+
+
+    /* Main */
+
+    .main {
+        margin-left: 0;
+
+        width: 100%;
+    }
+
+
+    /* Container */
+
+    .container {
+        padding: 28px 16px 40px;
+    }
+
+
+    /* Header */
+
+    .page-header {
+        margin-bottom: 22px;
+    }
+
+    .page-header h1 {
+        font-size: 27px;
+    }
+
+    .page-header p {
+        font-size: 13px;
+    }
+
+
+    /* Search */
+
+    .search-box {
+        margin-bottom: 22px;
+    }
+
+    .search-box input {
+        height: 46px;
+
+        font-size: 13px;
+    }
+
+
+    /* Rules */
+
+    .rule-card {
+        gap: 13px;
+
+        padding: 17px;
+    }
+
+    .rule-number {
+        width: 30px;
+        height: 30px;
+
+        border-radius: 8px;
+
+        font-size: 11px;
+    }
+
+    .rule-content h3 {
+        font-size: 14px;
+    }
+
+    .rule-content p {
+        font-size: 12px;
+
+        line-height: 1.7;
+    }
+
+
+    /* Home */
+
+    .home-page {
+        padding-top: 4px;
+    }
+
+    .home-page h2 {
+        font-size: 27px;
+
+        letter-spacing: -0.5px;
+    }
+
+    .home-page > p {
+        font-size: 13px;
+
+        margin-bottom: 24px;
+    }
+
+    .home-grid {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .home-card {
+        padding: 19px;
+    }
+
+
+    /* Rule count */
+
+    .rule-count {
+        font-size: 11px;
+    }
+
+}
+
+
+/* ========================================
+   VERY SMALL MOBILE
+======================================== */
+
+@media (max-width: 400px) {
+
+    .container {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .home-page h2 {
+        font-size: 24px;
+    }
+
+    .rule-card {
+        padding: 14px;
+    }
+
+}
