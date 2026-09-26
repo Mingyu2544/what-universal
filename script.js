@@ -1,132 +1,175 @@
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuJw6JvjNmise3J_MLpT5D_U-rLF-4/exec";
+  "https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuWjJ6vjNmise3J_MLpT5D_U-rLF-4/exec";
 
 let allRules = [];
 let currentCategory = "ทั้งหมด";
 
-
-// ==============================
-// โหลดข้อมูลจาก Google Sheets
-// ==============================
 
 function loadRules() {
 
   const callbackName =
     "rulesCallback_" + Date.now();
 
-  window[callbackName] = function (data) {
 
-    allRules = Array.isArray(data) ? data : [];
+  window[callbackName] = function(data) {
+
+    allRules =
+      Array.isArray(data)
+        ? data
+        : [];
+
 
     buildCategoryMenu();
+
     render();
 
+
     delete window[callbackName];
+
   };
+
 
   const script =
     document.createElement("script");
 
+
   script.src =
     API_URL +
     "?callback=" +
-    callbackName;
+    callbackName +
+    "&t=" +
+    Date.now();
 
-  script.onerror = function () {
 
-    document.getElementById("status").textContent =
-      "ไม่สามารถโหลดข้อมูลได้";
+  script.onerror = function() {
+
+    const status =
+      document.getElementById("status");
+
+    if (status) {
+      status.textContent =
+        "ไม่สามารถโหลดข้อมูลได้";
+    }
 
   };
 
+
   document.body.appendChild(script);
+
 }
 
-
-// ==============================
-// สร้างเมนูหมวดหมู่
-// ==============================
 
 function buildCategoryMenu() {
 
   const menu =
     document.getElementById("categoryMenu");
 
+
   if (!menu) return;
 
+
   const categories =
-    [...new Set(
-      allRules
-        .map(rule => rule.category)
-        .filter(Boolean)
-    )];
+    [
+      ...new Set(
+        allRules
+          .map(rule => rule.category)
+          .filter(Boolean)
+      )
+    ];
+
 
   menu.innerHTML = "";
 
-  // ปุ่มทั้งหมด
+
+  /*
+    กฎทั้งหมด
+  */
+
   const allButton =
     document.createElement("button");
+
 
   allButton.className =
     "category-btn active";
 
+
   allButton.innerHTML =
     `<span>▦</span> กฎทั้งหมด`;
 
-  allButton.onclick = function () {
 
-    currentCategory = "ทั้งหมด";
+  allButton.onclick =
+    function() {
 
-    setActiveCategory(this);
+      currentCategory =
+        "ทั้งหมด";
 
-    render();
-  };
-
-  menu.appendChild(allButton);
-
-
-  // ปุ่มแต่ละหมวด
-  categories.forEach(category => {
-
-    const button =
-      document.createElement("button");
-
-    button.className =
-      "category-btn";
-
-    button.innerHTML =
-      `<span>${getCategoryIcon(category)}</span> ${category}`;
-
-    button.onclick = function () {
-
-      currentCategory = category;
 
       setActiveCategory(this);
 
       render();
+
     };
 
-    menu.appendChild(button);
 
-  });
+  menu.appendChild(allButton);
+
+
+  /*
+    หมวดหมู่ต่าง ๆ
+  */
+
+  categories.forEach(
+    function(category) {
+
+      const button =
+        document.createElement("button");
+
+
+      button.className =
+        "category-btn";
+
+
+      button.innerHTML =
+        `<span>${getCategoryIcon(category)}</span> ${escapeHTML(category)}`;
+
+
+      button.onclick =
+        function() {
+
+          currentCategory =
+            category;
+
+
+          setActiveCategory(this);
+
+          render();
+
+        };
+
+
+      menu.appendChild(button);
+
+    }
+  );
+
 }
 
-
-// ==============================
-// ไอคอนหมวดหมู่
-// ==============================
 
 function getCategoryIcon(category) {
 
   const text =
-    category.toLowerCase();
+    String(category)
+      .toLowerCase();
+
 
   if (
     text.includes("โรลเพลย์") ||
-    text.includes("roleplay")
+    text.includes("roleplay") ||
+    text.includes("rp")
   ) {
     return "♟";
   }
+
 
   if (
     text.includes("อาชีพ") ||
@@ -134,6 +177,7 @@ function getCategoryIcon(category) {
   ) {
     return "▣";
   }
+
 
   if (
     text.includes("รถ") ||
@@ -143,6 +187,7 @@ function getCategoryIcon(category) {
     return "▰";
   }
 
+
   if (
     text.includes("เซิร์ฟเวอร์") ||
     text.includes("server")
@@ -150,61 +195,89 @@ function getCategoryIcon(category) {
     return "◈";
   }
 
+
   return "◆";
+
 }
 
-
-// ==============================
-// เปลี่ยนปุ่มที่กำลังเลือก
-// ==============================
 
 function setActiveCategory(activeButton) {
 
   document
     .querySelectorAll(".category-btn")
-    .forEach(button => {
+    .forEach(
+      function(button) {
 
-      button.classList.remove("active");
+        button.classList.remove(
+          "active"
+        );
 
-    });
+      }
+    );
+
 
   activeButton.classList.add("active");
+
 }
 
-
-// ==============================
-// แสดงกฎ
-// ==============================
 
 function render() {
 
   const container =
-    document.getElementById("rulesContainer");
+    document.getElementById(
+      "rulesContainer"
+    );
+
 
   const status =
-    document.getElementById("status");
+    document.getElementById(
+      "status"
+    );
+
 
   const count =
-    document.getElementById("ruleCount");
+    document.getElementById(
+      "ruleCount"
+    );
+
 
   if (!container) return;
 
 
+  /*
+    กรองตามหมวดหมู่
+  */
+
   let rules =
-    allRules.filter(rule => {
+    allRules.filter(
+      function(rule) {
 
-      if (currentCategory === "ทั้งหมด") {
-        return true;
+        if (
+          currentCategory ===
+          "ทั้งหมด"
+        ) {
+          return true;
+        }
+
+
+        return (
+          rule.category ===
+          currentCategory
+        );
+
       }
-
-      return rule.category === currentCategory;
-
-    });
+    );
 
 
-  // ค้นหา
+  /*
+    ค้นหา
+  */
+
   const searchInput =
-    document.getElementById("searchInput");
+    document.getElementById(
+      "searchInput"
+    );
+
 
   const search =
     searchInput
@@ -216,28 +289,63 @@ function render() {
 
   if (search) {
 
-    rules = rules.filter(rule => {
+    rules =
+      rules.filter(
+        function(rule) {
 
-      return (
-        String(rule.title || "")
-          .toLowerCase()
-          .includes(search) ||
+          return (
 
-        String(rule.body || "")
-          .toLowerCase()
-          .includes(search) ||
+            String(
+              rule.title || ""
+            )
+              .toLowerCase()
+              .includes(search)
 
-        String(rule.category || "")
-          .toLowerCase()
-          .includes(search)
+            ||
+
+            String(
+              rule.body || ""
+            )
+              .toLowerCase()
+              .includes(search)
+
+            ||
+
+            String(
+              rule.category || ""
+            )
+              .toLowerCase()
+              .includes(search)
+
+          );
+
+        }
       );
-
-    });
 
   }
 
 
-  // จำนวนกฎ
+  /*
+    เรียงตาม "ลำดับ"
+    จาก Google Sheets
+  */
+
+  rules.sort(
+    function(a, b) {
+
+      return (
+        Number(a.order || 999999) -
+        Number(b.order || 999999)
+      );
+
+    }
+  );
+
+
+  /*
+    จำนวนกฎ
+  */
+
   if (count) {
 
     count.textContent =
@@ -246,56 +354,97 @@ function render() {
   }
 
 
-  // ไม่มีข้อมูล
+  /*
+    ไม่พบข้อมูล
+  */
+
   if (rules.length === 0) {
 
     container.innerHTML = `
+
       <div class="empty-state">
-        <div class="empty-icon">⌕</div>
-        <h3>ไม่พบกฎที่ค้นหา</h3>
-        <p>ลองเปลี่ยนหมวดหมู่หรือคำค้นหา</p>
+
+        <div class="empty-icon">
+          ⌕
+        </div>
+
+        <h3>
+          ไม่พบกฎที่ค้นหา
+        </h3>
+
+        <p>
+          ลองเปลี่ยนหมวดหมู่หรือคำค้นหา
+        </p>
+
       </div>
+
     `;
+
 
     if (status) {
       status.textContent = "";
     }
 
+
     return;
+
   }
 
 
-  // แสดงข้อมูล
+  /*
+    แสดงกฎ
+  */
+
   container.innerHTML =
-    rules.map((rule, index) => {
+    rules.map(
+      function(rule) {
 
-      return `
-        <article class="rule-card">
+        /*
+          ใช้เลขจากคอลัมน์ "ลำดับ"
+        */
 
-          <div class="rule-number">
-            ${index + 1}
-          </div>
+        const ruleNumber =
+          Number(rule.order);
 
-          <div class="rule-content">
 
-            <div class="rule-category">
-              ${escapeHTML(rule.category)}
+        return `
+
+          <article class="rule-card">
+
+            <div class="rule-number">
+              ${
+                Number.isFinite(ruleNumber)
+                  ? ruleNumber
+                  : ""
+              }
             </div>
 
-            <h3>
-              ${escapeHTML(rule.title)}
-            </h3>
 
-            <p>
-              ${escapeHTML(rule.body)}
-            </p>
+            <div class="rule-content">
 
-          </div>
+              <div class="rule-category">
+                ${escapeHTML(rule.category)}
+              </div>
 
-        </article>
-      `;
 
-    }).join("");
+              <h3>
+                ${escapeHTML(rule.title)}
+              </h3>
+
+
+              <p>
+                ${escapeHTML(rule.body)}
+              </p>
+
+            </div>
+
+          </article>
+
+        `;
+
+      }
+    )
+    .join("");
 
 
   if (status) {
@@ -304,40 +453,58 @@ function render() {
       `แสดง ${rules.length} กฎ`;
 
   }
+
 }
 
-
-// ==============================
-// ป้องกัน HTML แปลกปลอม
-// ==============================
 
 function escapeHTML(value) {
 
   return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
 }
 
 
-// ==============================
-// ระบบค้นหา
-// ==============================
-
 document.addEventListener(
   "DOMContentLoaded",
-  function () {
+  function() {
+
 
     const searchInput =
-      document.getElementById("searchInput");
+      document.getElementById(
+        "searchInput"
+      );
+
 
     if (searchInput) {
 
       searchInput.addEventListener(
         "input",
-        function () {
+        function() {
 
           render();
 
@@ -345,6 +512,7 @@ document.addEventListener(
       );
 
     }
+
 
     loadRules();
 
