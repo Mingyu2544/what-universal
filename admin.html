@@ -262,172 +262,79 @@
 
 
 <script>
-
 const API_URL =
-    "https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuJwJ6vjNmise3J_MLpT5D_U-rLF-4/exec";
+    "https://script.google.com/macros/s/AKfycbyI9BcrBHCGzaNsxMiR2BOq68uRGagIcu8jq8HuWjJ6vjNmise3J_MLpT5D_U-rLF-4/exec";
 
-
-const form =
-    document.getElementById("adminForm");
-
-const message =
-    document.getElementById("message");
-
-const saveButton =
-    document.getElementById("saveButton");
-
+const form = document.getElementById("adminForm");
+const message = document.getElementById("message");
+const saveButton = document.getElementById("saveButton");
 
 function showMessage(text, type) {
-
     message.textContent = text;
-
-    message.className =
-        "admin-message " + type;
-
+    message.className = "admin-message " + type;
 }
-
-
-/* =========================
-   บันทึกกฎด้วย JSONP
-========================= */
 
 form.addEventListener("submit", function(event) {
 
     event.preventDefault();
 
-
     const category =
-        document.getElementById("category")
-        .value
-        .trim();
-
+        document.getElementById("category").value.trim();
 
     const title =
-        document.getElementById("title")
-        .value
-        .trim();
-
+        document.getElementById("title").value.trim();
 
     const body =
-        document.getElementById("body")
-        .value
-        .trim();
-
+        document.getElementById("body").value.trim();
 
     const order =
-        document.getElementById("order")
-        .value;
-
+        document.getElementById("order").value;
 
     if (!category || !title || !body) {
-
-        showMessage(
-            "กรุณากรอกข้อมูลให้ครบ",
-            "error"
-        );
-
+        showMessage("กรุณากรอกข้อมูลให้ครบ", "error");
         return;
     }
 
-
     saveButton.disabled = true;
+    saveButton.textContent = "กำลังบันทึก...";
 
-    saveButton.textContent =
-        "กำลังบันทึก...";
-
-
-    const callbackName =
-        "addRuleCallback_" + Date.now();
-
-
-    window[callbackName] =
-        function(result) {
-
-            if (result && result.success) {
-
-                showMessage(
-                    "เพิ่มกฎสำเร็จแล้ว",
-                    "success"
-                );
-
-                form.reset();
-
-                document.getElementById("order")
-                    .value = "1";
-
-            } else {
-
-                showMessage(
-                    result && result.message
-                        ? result.message
-                        : "บันทึกไม่สำเร็จ",
-                    "error"
-                );
-
-            }
-
-
-            saveButton.disabled = false;
-
-            saveButton.textContent =
-                "บันทึกกฎ";
-
-
-            delete window[callbackName];
-
-            if (script) {
-                script.remove();
-            }
-
-        };
-
-
-    const script =
-        document.createElement("script");
-
-
-    script.src =
+    const url =
         API_URL +
         "?action=add" +
-        "&category=" +
-        encodeURIComponent(category) +
-        "&title=" +
-        encodeURIComponent(title) +
-        "&body=" +
-        encodeURIComponent(body) +
-        "&order=" +
-        encodeURIComponent(order) +
-        "&callback=" +
-        callbackName;
+        "&category=" + encodeURIComponent(category) +
+        "&title=" + encodeURIComponent(title) +
+        "&body=" + encodeURIComponent(body) +
+        "&order=" + encodeURIComponent(order) +
+        "&t=" + Date.now();
 
+    const iframe = document.createElement("iframe");
 
-    script.onerror =
-        function() {
+    iframe.style.display = "none";
+    iframe.src = url;
 
-            showMessage(
-                "ไม่สามารถเชื่อมต่อกับระบบได้",
-                "error"
-            );
+    document.body.appendChild(iframe);
 
+    setTimeout(function() {
 
-            saveButton.disabled = false;
+        showMessage(
+            "ส่งข้อมูลเรียบร้อยแล้ว กรุณาตรวจสอบข้อมูลในระบบ",
+            "success"
+        );
 
-            saveButton.textContent =
-                "บันทึกกฎ";
+        form.reset();
 
+        document.getElementById("order").value = "1";
 
-            delete window[callbackName];
+        saveButton.disabled = false;
+        saveButton.textContent = "บันทึกกฎ";
 
-            script.remove();
+        setTimeout(function() {
+            iframe.remove();
+        }, 1000);
 
-        };
-
-
-    document.body.appendChild(script);
+    }, 2000);
 
 });
-
 </script>
-
 </body>
 </html>
