@@ -5,11 +5,14 @@ let allRules = [];
 let currentCategory = "ทั้งหมด";
 
 function loadRules() {
-  const callbackName = "rulesCallback_" + Date.now();
+
+  const callbackName =
+    "rulesCallback_" + Date.now();
 
   window[callbackName] = function (data) {
 
-    allRules = Array.isArray(data) ? data : [];
+    allRules =
+      Array.isArray(data) ? data : [];
 
     buildCategoryMenu();
     render();
@@ -17,7 +20,8 @@ function loadRules() {
     delete window[callbackName];
   };
 
-  const script = document.createElement("script");
+  const script =
+    document.createElement("script");
 
   script.src =
     API_URL +
@@ -25,8 +29,10 @@ function loadRules() {
     callbackName;
 
   script.onerror = function () {
+
     document.getElementById("status").textContent =
       "ไม่สามารถโหลดข้อมูลได้";
+
   };
 
   document.body.appendChild(script);
@@ -35,7 +41,8 @@ function loadRules() {
 
 function buildCategoryMenu() {
 
-  const menu = document.getElementById("categoryMenu");
+  const menu =
+    document.getElementById("categoryMenu");
 
   if (!menu) return;
 
@@ -50,9 +57,11 @@ function buildCategoryMenu() {
   menu.innerHTML = "";
 
 
-  const allButton = document.createElement("button");
+  const allButton =
+    document.createElement("button");
 
-  allButton.className = "category-btn active";
+  allButton.className =
+    "category-btn active";
 
   allButton.innerHTML =
     `<span>▦</span> กฎทั้งหมด`;
@@ -74,7 +83,8 @@ function buildCategoryMenu() {
     const button =
       document.createElement("button");
 
-    button.className = "category-btn";
+    button.className =
+      "category-btn";
 
     button.innerHTML =
       `<span>${getCategoryIcon(category)}</span> ${escapeHTML(category)}`;
@@ -162,15 +172,16 @@ function render() {
   if (!container) return;
 
 
-  let rules = allRules.filter(function (rule) {
+  let rules =
+    allRules.filter(function (rule) {
 
-    if (currentCategory === "ทั้งหมด") {
-      return true;
-    }
+      if (currentCategory === "ทั้งหมด") {
+        return true;
+      }
 
-    return rule.category === currentCategory;
+      return rule.category === currentCategory;
 
-  });
+    });
 
 
   const searchInput =
@@ -184,43 +195,32 @@ function render() {
 
   if (search) {
 
-    rules = rules.filter(function (rule) {
+    rules =
+      rules.filter(function (rule) {
 
-      return (
-        String(rule.title || "")
-          .toLowerCase()
-          .includes(search)
+        return (
 
-        ||
+          String(rule.title || "")
+            .toLowerCase()
+            .includes(search)
 
-        String(rule.body || "")
-          .toLowerCase()
-          .includes(search)
+          ||
 
-        ||
+          String(rule.body || "")
+            .toLowerCase()
+            .includes(search)
 
-        String(rule.category || "")
-          .toLowerCase()
-          .includes(search)
-      );
+          ||
 
-    });
+          String(rule.category || "")
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+      });
 
   }
-
-
-  /*
-   * เรียงตาม "ลำดับ"
-   * จาก Google Sheets
-   */
-  rules.sort(function (a, b) {
-
-    return (
-      Number(a.order || 999999) -
-      Number(b.order || 999999)
-    );
-
-  });
 
 
   if (count) {
@@ -235,11 +235,13 @@ function render() {
 
     container.innerHTML = `
       <div class="empty-state">
+
         <div class="empty-icon">⌕</div>
 
         <h3>ไม่พบกฎที่ค้นหา</h3>
 
         <p>ลองเปลี่ยนหมวดหมู่หรือคำค้นหา</p>
+
       </div>
     `;
 
@@ -252,24 +254,13 @@ function render() {
 
 
   container.innerHTML =
-    rules.map(function (rule) {
-
-      /*
-       * ใช้ "ลำดับ" จาก Google Sheets
-       */
-      const ruleNumber =
-        Number(rule.order);
-
+    rules.map(function (rule, index) {
 
       return `
         <article class="rule-card">
 
           <div class="rule-number">
-            ${
-              Number.isFinite(ruleNumber)
-                ? ruleNumber
-                : ""
-            }
+            ${index + 1}
           </div>
 
           <div class="rule-content">
@@ -313,6 +304,7 @@ function escapeHTML(value) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+
 }
 
 
@@ -328,7 +320,9 @@ document.addEventListener(
       searchInput.addEventListener(
         "input",
         function () {
+
           render();
+
         }
       );
 
